@@ -37,6 +37,8 @@ class LGImagePickController: UITableViewController {
         super.viewWillAppear(animated)
         let item = UIBarButtonItem(title: "取消", style: .Plain, target: self, action: "dismissView")
         self.navigationItem.rightBarButtonItem = item
+        
+        selectedInfo.removeAllObjects()
     }
     
     func dismissView() {
@@ -86,6 +88,7 @@ class LGImagePickController: UITableViewController {
         let gridCtrl = LGAssetGridViewController()
         gridCtrl.assetsFetchResults = fetchReslut?.fetchResult
         gridCtrl.selectedInfo = selectedInfo
+        gridCtrl.title = fetchReslut?.title
         self.navigationController?.pushViewController(gridCtrl, animated: true)
     }
     

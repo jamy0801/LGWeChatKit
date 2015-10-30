@@ -10,7 +10,7 @@ import UIKit
 
 
 enum shareMoreType: Int {
-    case picture = 1, video, movie, timeSpeak, hongbao, personCard, location, store
+    case picture = 1, video, location, movie, timeSpeak, hongbao, personCard, store
     
     func imageForType() -> (UIImage, String) {
         var image = UIImage()
@@ -22,6 +22,9 @@ enum shareMoreType: Int {
         case .video:
             image = UIImage(named: "sharemore_videovoip")!
             title = "拍摄"
+        case .location:
+            image = UIImage(named: "sharemore_location")!
+            title = "位置"
         case .movie:
             image = UIImage(named: "sharemore_myfav")!
             title = "小视频"
@@ -34,9 +37,6 @@ enum shareMoreType: Int {
         case .personCard:
             image = UIImage(named: "sharemore_friendcard")!
             title = "个人名片"
-        case .location:
-            image = UIImage(named: "sharemore_location")!
-            title = "位置"
         case .store:
             image = UIImage(named: "sharemore_myfav")!
             title = "收藏"

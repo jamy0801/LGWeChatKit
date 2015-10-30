@@ -25,6 +25,8 @@ class LGChatBaseCell: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         
         iconImageView = UIImageView(image: UIImage(named: "DefaultHead"))
+        iconImageView.layer.cornerRadius = 8.0
+        iconImageView.layer.masksToBounds = true
         iconImageView.tag = iconImageTag
         
         backgroundImageView = UIImageView(image: backgroundImage.incoming, highlightedImage: backgroundImage.incomingHighlighed)
@@ -107,8 +109,6 @@ class LGChatBaseCell: UITableViewCell {
             if let image = UIImage(named: message.iconName) {
                 iconImageView.image = image
             }
-        } else {
-            iconImageView.image = UIImage(named: "boy")
         }
         
         if message.incoming != (tag == receiveTag) {

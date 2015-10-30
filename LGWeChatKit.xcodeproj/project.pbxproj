@@ -139,7 +139,6 @@
 		3502BD481BE231290028CADF /* LGChatTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3502BCA41BE231280028CADF /* LGChatTextCell.swift */; };
 		3502BD491BE231290028CADF /* LGChatVoiceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3502BCA51BE231280028CADF /* LGChatVoiceCell.swift */; };
 		3502BD4A1BE231290028CADF /* LGEmotionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3502BCA61BE231280028CADF /* LGEmotionView.swift */; };
-		3502BD4B1BE231290028CADF /* LGMoreActionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3502BCA71BE231280028CADF /* LGMoreActionView.swift */; };
 		3502BD4C1BE231290028CADF /* LGRecordIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3502BCA81BE231280028CADF /* LGRecordIndicatorView.swift */; };
 		3502BD4D1BE231290028CADF /* LGShareMoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3502BCA91BE231280028CADF /* LGShareMoreView.swift */; };
 		3502BD4E1BE231290028CADF /* LGToolBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3502BCAA1BE231280028CADF /* LGToolBarView.swift */; };
@@ -167,6 +166,11 @@
 		3502BD641BE231290028CADF /* LGAudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3502BCC91BE231290028CADF /* LGAudioRecorder.swift */; };
 		3502BD651BE231290028CADF /* LGEmotionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3502BCCA1BE231290028CADF /* LGEmotionManager.swift */; };
 		3502BD661BE231290028CADF /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3502BCCB1BE231290028CADF /* Observable.swift */; };
+		35F4D3221BE316FD00768E6D /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35F4D3211BE316FD00768E6D /* MapKit.framework */; };
+		35F4D3241BE3170400768E6D /* Contacts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35F4D3231BE3170400768E6D /* Contacts.framework */; };
+		35F4D3261BE3170B00768E6D /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35F4D3251BE3170B00768E6D /* Photos.framework */; };
+		35F4D3281BE3171300768E6D /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35F4D3271BE3171300768E6D /* AudioToolbox.framework */; };
+		35F4D32A1BE3171A00768E6D /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35F4D3291BE3171A00768E6D /* VideoToolbox.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -325,7 +329,6 @@
 		3502BCA41BE231280028CADF /* LGChatTextCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LGChatTextCell.swift; sourceTree = "<group>"; };
 		3502BCA51BE231280028CADF /* LGChatVoiceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LGChatVoiceCell.swift; sourceTree = "<group>"; };
 		3502BCA61BE231280028CADF /* LGEmotionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LGEmotionView.swift; sourceTree = "<group>"; };
-		3502BCA71BE231280028CADF /* LGMoreActionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LGMoreActionView.swift; sourceTree = "<group>"; };
 		3502BCA81BE231280028CADF /* LGRecordIndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LGRecordIndicatorView.swift; sourceTree = "<group>"; };
 		3502BCA91BE231280028CADF /* LGShareMoreView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LGShareMoreView.swift; sourceTree = "<group>"; };
 		3502BCAA1BE231280028CADF /* LGToolBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LGToolBarView.swift; sourceTree = "<group>"; };
@@ -353,6 +356,11 @@
 		3502BCC91BE231290028CADF /* LGAudioRecorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LGAudioRecorder.swift; sourceTree = "<group>"; };
 		3502BCCA1BE231290028CADF /* LGEmotionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LGEmotionManager.swift; sourceTree = "<group>"; };
 		3502BCCB1BE231290028CADF /* Observable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
+		35F4D3211BE316FD00768E6D /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		35F4D3231BE3170400768E6D /* Contacts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Contacts.framework; path = System/Library/Frameworks/Contacts.framework; sourceTree = SDKROOT; };
+		35F4D3251BE3170B00768E6D /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
+		35F4D3271BE3171300768E6D /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		35F4D3291BE3171A00768E6D /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = System/Library/Frameworks/VideoToolbox.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -360,6 +368,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				35F4D32A1BE3171A00768E6D /* VideoToolbox.framework in Frameworks */,
+				35F4D3281BE3171300768E6D /* AudioToolbox.framework in Frameworks */,
+				35F4D3261BE3170B00768E6D /* Photos.framework in Frameworks */,
+				35F4D3241BE3170400768E6D /* Contacts.framework in Frameworks */,
+				35F4D3221BE316FD00768E6D /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -383,6 +396,11 @@
 		3502BBE71BE22FB70028CADF = {
 			isa = PBXGroup;
 			children = (
+				35F4D3291BE3171A00768E6D /* VideoToolbox.framework */,
+				35F4D3271BE3171300768E6D /* AudioToolbox.framework */,
+				35F4D3251BE3170B00768E6D /* Photos.framework */,
+				35F4D3231BE3170400768E6D /* Contacts.framework */,
+				35F4D3211BE316FD00768E6D /* MapKit.framework */,
 				3502BBF21BE22FB80028CADF /* LGWeChatKit */,
 				3502BC071BE22FB80028CADF /* LGWeChatKitTests */,
 				3502BC121BE22FB80028CADF /* LGWeChatKitUITests */,
@@ -433,8 +451,8 @@
 		3502BC211BE231280028CADF /* LGChatKit */ = {
 			isa = PBXGroup;
 			children = (
-				3502BC221BE231280028CADF /* conversion */,
 				3502BCAD1BE231280028CADF /* conversionList */,
+				3502BC221BE231280028CADF /* conversion */,
 				3502BCB61BE231280028CADF /* Extension */,
 				3502BCBA1BE231280028CADF /* find */,
 				3502BCBE1BE231290028CADF /* friend */,
@@ -447,8 +465,8 @@
 		3502BC221BE231280028CADF /* conversion */ = {
 			isa = PBXGroup;
 			children = (
-				3502BC231BE231280028CADF /* imagePick */,
 				3502BC2E1BE231280028CADF /* LGConversationViewController.swift */,
+				3502BC231BE231280028CADF /* imagePick */,
 				3502BC2F1BE231280028CADF /* mapKit */,
 				3502BC321BE231280028CADF /* view */,
 				3502BCAB1BE231280028CADF /* viewModel */,
@@ -459,16 +477,11 @@
 		3502BC231BE231280028CADF /* imagePick */ = {
 			isa = PBXGroup;
 			children = (
-				3502BC241BE231280028CADF /* LGAssertGridViewCell.swift */,
-				3502BC251BE231280028CADF /* LGAssetGridViewController.swift */,
-				3502BC261BE231280028CADF /* LGAssetModel.swift */,
-				3502BC271BE231280028CADF /* LGAssetToolView.swift */,
-				3502BC281BE231280028CADF /* LGAssetViewCell.swift */,
-				3502BC291BE231280028CADF /* LGAssetViewController.swift */,
-				3502BC2A1BE231280028CADF /* LGAssetViewModel.swift */,
 				3502BC2B1BE231280028CADF /* LGImagePickController.swift */,
-				3502BC2C1BE231280028CADF /* LGImagePickModel.swift */,
-				3502BC2D1BE231280028CADF /* LGImagePickViewModel.swift */,
+				3502BC251BE231280028CADF /* LGAssetGridViewController.swift */,
+				3502BC291BE231280028CADF /* LGAssetViewController.swift */,
+				35A4FA751BE255C800B7060C /* view */,
+				35A4FA741BE255B800B7060C /* viewModel */,
 			);
 			path = imagePick;
 			sourceTree = "<group>";
@@ -491,7 +504,6 @@
 				3502BCA41BE231280028CADF /* LGChatTextCell.swift */,
 				3502BCA51BE231280028CADF /* LGChatVoiceCell.swift */,
 				3502BCA61BE231280028CADF /* LGEmotionView.swift */,
-				3502BCA71BE231280028CADF /* LGMoreActionView.swift */,
 				3502BCA81BE231280028CADF /* LGRecordIndicatorView.swift */,
 				3502BCA91BE231280028CADF /* LGShareMoreView.swift */,
 				3502BCAA1BE231280028CADF /* LGToolBarView.swift */,
@@ -710,6 +722,27 @@
 				3502BCCB1BE231290028CADF /* Observable.swift */,
 			);
 			path = utilities;
+			sourceTree = "<group>";
+		};
+		35A4FA741BE255B800B7060C /* viewModel */ = {
+			isa = PBXGroup;
+			children = (
+				3502BC2A1BE231280028CADF /* LGAssetViewModel.swift */,
+				3502BC2C1BE231280028CADF /* LGImagePickModel.swift */,
+				3502BC261BE231280028CADF /* LGAssetModel.swift */,
+				3502BC2D1BE231280028CADF /* LGImagePickViewModel.swift */,
+			);
+			name = viewModel;
+			sourceTree = "<group>";
+		};
+		35A4FA751BE255C800B7060C /* view */ = {
+			isa = PBXGroup;
+			children = (
+				3502BC241BE231280028CADF /* LGAssertGridViewCell.swift */,
+				3502BC271BE231280028CADF /* LGAssetToolView.swift */,
+				3502BC281BE231280028CADF /* LGAssetViewCell.swift */,
+			);
+			name = view;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -963,7 +996,6 @@
 				3502BD551BE231290028CADF /* LGConversionListCellModel.swift in Sources */,
 				3502BD581BE231290028CADF /* LGCommonEx.swift in Sources */,
 				3502BD471BE231290028CADF /* LGChatImageCell.swift in Sources */,
-				3502BD4B1BE231290028CADF /* LGMoreActionView.swift in Sources */,
 				3502BBF41BE22FB80028CADF /* AppDelegate.swift in Sources */,
 				3502BD601BE231290028CADF /* LGFriendViewController.swift in Sources */,
 				3502BD631BE231290028CADF /* LGAudioPlayer.swift in Sources */,
@@ -1080,7 +1112,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -1118,7 +1150,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -1214,6 +1246,7 @@
 				3502BC1A1BE22FB80028CADF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3502BC1B1BE22FB80028CADF /* Build configuration list for PBXNativeTarget "LGWeChatKitTests" */ = {
 			isa = XCConfigurationList;
@@ -1222,6 +1255,7 @@
 				3502BC1D1BE22FB80028CADF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3502BC1E1BE22FB80028CADF /* Build configuration list for PBXNativeTarget "LGWeChatKitUITests" */ = {
 			isa = XCConfigurationList;
@@ -1230,6 +1264,7 @@
 				3502BC201BE22FB80028CADF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

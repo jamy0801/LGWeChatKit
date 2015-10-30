@@ -117,7 +117,7 @@ extension LGAssetViewController: UICollectionViewDataSource, UICollectionViewDel
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! LGAssetViewCell
-        
+        cell.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "imageTapGesture:"))
         let assetModel = assetModels[indexPath.row]
         let viewModel = LGAssetViewModel(assetMode: assetModel)
         viewModel.updateStaticImage(cellSize)
@@ -129,7 +129,6 @@ extension LGAssetViewController: UICollectionViewDataSource, UICollectionViewDel
             selectButton.setImage(UIImage(named: "CellGreySelected"), forState: .Normal)
         }
 
-        
         return cell
     }
     
@@ -139,7 +138,27 @@ extension LGAssetViewController: UICollectionViewDataSource, UICollectionViewDel
         let viewModel = LGAssetViewModel(assetMode: assetModel)
         viewModel.updateStaticImage(cellSize)
         cell.viewModel = viewModel
+        if assetModel.select {
+            selectButton.setImage(UIImage(named: "CellBlueSelected"), forState: .Normal)
+        } else {
+            selectButton.setImage(UIImage(named: "CellGreySelected"), forState: .Normal)
+        }
     }
-  
+    
+    func imageTapGesture(gesture: UITapGestureRecognizer) {
+        if UIApplication.sharedApplication().statusBarHidden == false {
+            UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: .Slide)
+            navigationController?.navigationBar.hidden = true
+            UIView.animateWithDuration(0.3, animations: { () -> Void in
+                self.toolBar.frame = CGRectMake(0, self.view.bounds.height, self.view.bounds.width, 50)
+            })
+        } else {
+            navigationController?.navigationBar.hidden = false
+            UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: .Slide)
+            UIView.animateWithDuration(0.3, animations: { () -> Void in
+                self.toolBar.frame = CGRectMake(0, self.view.bounds.height - 50, self.view.bounds.width, 50)
+            })
+        }
+    }
 }
 

@@ -18,7 +18,7 @@ enum LGMessageType {
 class Message {
     let incoming: Bool
     let sentDate: NSDate
-    let iconName: String
+    var iconName: String
     
     var messageType: LGMessageType {
         get {
@@ -29,7 +29,7 @@ class Message {
         let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
         let date = NSDate()
         let formater = NSDateFormatter()
-        formater.dateFormat = "MM-dd HH:mm:ss"
+        formater.dateFormat = "MM-dd HH:mm"
         var dateStr: String = formater.stringFromDate(date)
         return dateStr
     }()
@@ -38,10 +38,12 @@ class Message {
         self.incoming = incoming
         self.sentDate = sentDate
         self.iconName = iconName
-    }
-    
-    func calculatorDate() {
-        
+        // for test
+        if incoming {
+            self.iconName = "icon1"
+        } else {
+            self.iconName = "icon3"
+        }
     }
 }
 

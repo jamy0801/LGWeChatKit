@@ -9,6 +9,7 @@
 import Foundation
 import Contacts
 
+@available(iOS 9.0, *)
 class FriendViewModel {
     let friendSession: Observable<[contactSessionModel]>
     

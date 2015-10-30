@@ -33,6 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func configurationRootViewController() -> UITabBarController {
         let messageListCtrl = LGConversationListController()
         messageListCtrl.tabBarItem.title = "消息"
+        messageListCtrl.tabBarItem.setTitleTextAttributes([NSForegroundColorAttributeName : UIColor(hexString: "68BB1E")!], forState: .Selected)
         messageListCtrl.tabBarItem.image = UIImage(named: "tabbar_mainframe")?.imageWithRenderingMode(.AlwaysOriginal)
         messageListCtrl.tabBarItem.selectedImage = UIImage(named: "tabbar_mainframeHL")?.imageWithRenderingMode(.AlwaysOriginal)
         let messageNavigationController = UINavigationController(rootViewController: messageListCtrl)
@@ -40,6 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Create `chatsTableViewController`
         let friendCtrl = LGFriendViewController()
         friendCtrl.tabBarItem.title = "通讯录"
+        friendCtrl.tabBarItem.setTitleTextAttributes([NSForegroundColorAttributeName : UIColor(hexString: "68BB1E")!], forState: .Selected)
         friendCtrl.tabBarItem.image = UIImage(named: "tabbar_contacts")?.imageWithRenderingMode(.AlwaysOriginal)
         friendCtrl.tabBarItem.selectedImage = UIImage(named: "tabbar_contactsHL")?.imageWithRenderingMode(.AlwaysOriginal)
         let friendNavigationController = UINavigationController(rootViewController: friendCtrl)
@@ -47,6 +49,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Create `profileTableViewController`
         let finderCtrl = UIStoryboard(name: "findSB", bundle: nil).instantiateInitialViewController() as! LGFindViewController
         finderCtrl.tabBarItem.title = "发现"
+        finderCtrl.tabBarItem.setTitleTextAttributes([NSForegroundColorAttributeName : UIColor(hexString: "68BB1E")!], forState: .Selected)
         finderCtrl.tabBarItem.image = UIImage(named: "tabbar_discover")?.imageWithRenderingMode(.AlwaysOriginal)
         finderCtrl.tabBarItem.selectedImage = UIImage(named: "tabbar_discoverHL")?.imageWithRenderingMode(.AlwaysOriginal)
         let findNavigationController = UINavigationController(rootViewController: finderCtrl)
@@ -54,6 +57,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Create `settingsTableViewController`
         let setCtrl = UIStoryboard(name: "setSB", bundle: nil).instantiateInitialViewController() as! LGMeViewController
         setCtrl.tabBarItem.title = "我"
+        setCtrl.tabBarItem.setTitleTextAttributes([NSForegroundColorAttributeName : UIColor(hexString: "68BB1E")!], forState: .Selected)
         setCtrl.tabBarItem.image = UIImage(named: "tabbar_me")?.imageWithRenderingMode(.AlwaysOriginal)
         setCtrl.tabBarItem.selectedImage = UIImage(named: "tabbar_meHL")?.imageWithRenderingMode(.AlwaysOriginal)
         let settingsNavigationController = UINavigationController(rootViewController: setCtrl)

@@ -11,6 +11,7 @@ import MapKit
 
 protocol LGMapViewControllerDelegate {
     func mapViewController(controller: LGMapViewController, didSelectLocationSnapeShort image: UIImage)
+    func mapViewController(controller: LGMapViewController, didCancel error: NSError?)
 }
 
 class LGMapViewController: UIViewController {
@@ -33,9 +34,8 @@ class LGMapViewController: UIViewController {
         locationManager = CLLocationManager()
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
-        locationManager.requestWhenInUseAuthorization()
         locationManager.requestAlwaysAuthorization()
-        
+
         tableView = UITableView(frame: view.bounds, style: .Plain)
         tableView.delegate = self
         tableView.dataSource = self
@@ -90,6 +90,7 @@ class LGMapViewController: UIViewController {
     }
     
     func dismissView() {
+        self.delegate?.mapViewController(self, didCancel: nil)
         self.dismissViewControllerAnimated(true, completion: nil)
     }
 
@@ -149,12 +150,17 @@ extension LGMapViewController: UITableViewDataSource, UITableViewDelegate {
 
 
 extension LGMapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
+    
     func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
         
     }
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-  
+        NSLog("get location")
+    }
+    
+    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+        
     }
     
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {

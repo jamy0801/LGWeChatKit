@@ -34,7 +34,7 @@ class LGAssertGridViewCell: UICollectionViewCell {
         buttonSelect = false
         super.init(frame: frame)
         imageView = UIImageView(frame: bounds)
-        
+        imageView.contentMode = .ScaleToFill
         contentView.addSubview(imageView)
         
         selectIndicator.frame = CGRectMake(bounds.width - buttonWidth , 0, buttonWidth, buttonWidth)

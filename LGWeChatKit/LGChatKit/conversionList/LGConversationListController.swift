@@ -17,7 +17,7 @@ class LGConversationListController: UITableViewController, LGConversionListBaseC
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return 20
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -28,7 +28,7 @@ class LGConversationListController: UITableViewController, LGConversionListBaseC
             
             cell = LGConversionListCell(style: .Subtitle, reuseIdentifier: "messageListCell")
             cell?.delegate = self
-            cell?.loadViewModel(updateCell())
+            cell?.viewModel = updateCell()
             
             cell?.setLeftButtons(leftButtons)
             cell?.setRightButtons(rightButtons)

@@ -1,12 +1,3 @@
-//
-//  SWTableViewCell.m
-//  SWTableViewCell
-//
-//  Created by Chris Wendel on 9/10/13.
-//  Copyright (c) 2013 Chris Wendel. All rights reserved.
-//
-//  Warning: this file is base on SWTableViewCell:https://github.com/CEWendel/SWTableViewCell
-
 //  LGConversionListBaseCell.swift
 //  LGChatViewController
 //
@@ -42,13 +33,12 @@ class LGCellScrollView: UIScrollView, UIGestureRecognizerDelegate {
             let gesture = gestureRecognizer as! UIPanGestureRecognizer
             let velocity = gesture.velocityInView(gestureRecognizer.view).y
             
-            return fabs(velocity) <= 0.25
+            return fabs(velocity) <= 0.20
         }
         return true
     }
     
 }
-
 
 @IBDesignable
 class LGConversionListBaseCell: UITableViewCell {
@@ -183,7 +173,6 @@ class LGConversionListBaseCell: UITableViewCell {
         removeOldTableViewPanObserver()
     }
     
-    
     // MARK: - observer
     
     let tableViewKeyPath = "state"
@@ -296,7 +285,7 @@ class LGConversionListBaseCell: UITableViewCell {
             if newCell != self && newCell.isKindOfClass(LGConversionListBaseCell.self) {
                 if newCell.cellStatus != .Center {
                     newCell.hiddenButtonsAnimated(true)
-                    return
+                    break
                 }
             }
         }

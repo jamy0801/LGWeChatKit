@@ -26,6 +26,8 @@ class LGConversationViewController: UIViewController, UITableViewDataSource, UIT
     var recorder: LGAudioRecorder!
     var player: LGAudioPlayer!
     
+    var toolBarConstranit: NSLayoutConstraint!
+    
     // MARK: - lifecycle
     init(){
         super.init(nibName: nil, bundle: nil)
@@ -42,7 +44,7 @@ class LGConversationViewController: UIViewController, UITableViewDataSource, UIT
         
         view.backgroundColor = UIColor(patternImage: UIImage(named: "bg3")!)
         
-        tableView = UITableView(frame: CGRectMake(0, 0, view.bounds.width, view.bounds.height - toolBarMinHeight), style: .Plain)
+        tableView = UITableView()
         tableView.backgroundColor = UIColor.clearColor()
         tableView.autoresizingMask = [.FlexibleHeight, .FlexibleWidth]
         tableView.delegate = self
@@ -58,7 +60,6 @@ class LGConversationViewController: UIViewController, UITableViewDataSource, UIT
         
         recordIndicatorView = LGRecordIndicatorView(frame: CGRectMake(self.view.center.x - indicatorViewH / 2, self.view.center.y - indicatorViewH / 3, indicatorViewH, indicatorViewH))
  
-        
         emojiView = LGEmotionView(frame: CGRectMake(0, 0, view.bounds.width, 196))
         emojiView.delegate = self
         
@@ -67,15 +68,24 @@ class LGConversationViewController: UIViewController, UITableViewDataSource, UIT
         toolBarView = LGToolBarView(taget: self, voiceSelector: "voiceClick:", recordSelector: "recordClick:", emotionSelector: "emotionClick:", moreSelector: "moreClick:")
         toolBarView.textView.delegate = self
         view.addSubview(toolBarView)
+        
+        tableView.translatesAutoresizingMaskIntoConstraints = false
         toolBarView.translatesAutoresizingMaskIntoConstraints = false
+        
         view.addConstraint(NSLayoutConstraint(item: toolBarView, attribute: .Left, relatedBy: .Equal, toItem: view, attribute: .Left, multiplier: 1, constant: 0))
         view.addConstraint(NSLayoutConstraint(item: toolBarView, attribute: .Right, relatedBy: .Equal, toItem: view, attribute: .Right, multiplier: 1, constant: 0))
-        view.addConstraint(NSLayoutConstraint(item: toolBarView, attribute: .Top, relatedBy: .Equal, toItem: tableView, attribute: .Bottom, multiplier: 1, constant: 0))
-        toolBarView.addConstraint(NSLayoutConstraint(item: toolBarView, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: toolBarMinHeight))
+        view.addConstraint(NSLayoutConstraint(item: toolBarView, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .Height, multiplier: 1, constant: toolBarMinHeight))
+        toolBarConstranit = NSLayoutConstraint(item: toolBarView, attribute: .Bottom, relatedBy: .Equal, toItem: view, attribute: .Bottom, multiplier: 1, constant: 0)
+        view.addConstraint(toolBarConstranit)
         
+        view.addConstraint(NSLayoutConstraint(item: tableView, attribute: .Left, relatedBy: .Equal, toItem: view, attribute: .Left, multiplier: 1, constant: 0))
+        view.addConstraint(NSLayoutConstraint(item: tableView, attribute: .Right, relatedBy: .Equal, toItem: view, attribute: .Right, multiplier: 1, constant: 0))
+        view.addConstraint(NSLayoutConstraint(item: tableView, attribute: .Top, relatedBy: .Equal, toItem: view, attribute: .Top, multiplier: 1, constant: 0))
+        view.addConstraint(NSLayoutConstraint(item: tableView, attribute: .Bottom, relatedBy: .Equal, toItem: toolBarView, attribute: .Top, multiplier: 1, constant: 0))
         
         tableView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "tapTableView:"))
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardChange:", name: UIKeyboardWillChangeFrameNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "hiddenMenuController:", name: UIMenuControllerWillHideMenuNotification, object: nil)
     }
     
     
@@ -139,7 +149,6 @@ class LGConversationViewController: UIViewController, UITableViewDataSource, UIT
         return nil
     }
     
-    
     func scrollToBottom() {
         if messageList.count <= 1 {
             return
@@ -151,7 +160,7 @@ class LGConversationViewController: UIViewController, UITableViewDataSource, UIT
     
     func reloadTableView() {
         tableView.reloadData()
-        scrollToBottom()
+       scrollToBottom()
     }
     
     // MARK: - keyBoard notification
@@ -162,11 +171,12 @@ class LGConversationViewController: UIViewController, UITableViewDataSource, UIT
         
         if newFrame.origin.y == UIScreen.mainScreen().bounds.size.height {
             UIView.animateWithDuration(animationTimer, animations: { () -> Void in
-                self.view.transform = CGAffineTransformIdentity
+                self.toolBarConstranit.constant = 0
             })
         } else {
             UIView.animateWithDuration(animationTimer, animations: { () -> Void in
-                self.view.transform = CGAffineTransformMakeTranslation(0, -newFrame.size.height)
+               self.toolBarConstranit.constant = -newFrame.size.height
+                self.scrollToBottom()
             })
         }
     }
@@ -193,26 +203,39 @@ class LGConversationViewController: UIViewController, UITableViewDataSource, UIT
     }
     
     func copyAction(menuController: UIMenuController) {
-       // let selectedIndexPath = tableView.indexPathForSelectedRow
-        UIPasteboard.generalPasteboard().string = "复制测试！！！"
+        if let selectedIndexPath = tableView.indexPathForSelectedRow {
+            if let message = messageList[selectedIndexPath.row] as? textMessage {
+                UIPasteboard.generalPasteboard().string = message.text
+            }
+        }
     }
     
     func transtionAction(menuController: UIMenuController) {
-        
+        NSLog("转发")
     }
     
     func deleteAction(menuController: UIMenuController) {
-        
+        if let selectedIndexPath = tableView.indexPathForSelectedRow {
+            messageList.removeAtIndex(selectedIndexPath.row)
+            tableView.reloadData()
+        }
     }
     
     func moreAciton(menuController: UIMenuController) {
-        
+        NSLog("click more")
     }
     
+    func hiddenMenuController(notifiacation: NSNotification) {
+        if let selectedIndexpath = tableView.indexPathForSelectedRow {
+            tableView.deselectRowAtIndexPath(selectedIndexpath, animated: false)
+        }
+        (notifiacation.object as! UIMenuController).menuItems = nil
+    }
     
     // MARK: - gestureRecognizer
     func tapTableView(gestureRecognizer: UITapGestureRecognizer) {
         self.view.endEditing(true)
+        toolBarConstranit.constant = 0
         toolBarView.showEmotion(false)
         toolBarView.showMore(false)
     }
@@ -235,8 +258,6 @@ class LGConversationViewController: UIViewController, UITableViewDataSource, UIT
             })
         }
     }
-    
-    
 }
 
 // MARK: extension for toobar action
@@ -360,6 +381,10 @@ extension LGConversationViewController {
         sendImage(image)
     }
     
+    func mapViewController(controller: LGMapViewController, didCancel error: NSError?) {
+        toolBarView.showMore(false)
+    }
+    
     // MARK: - imagePick delegate
     func imagePickerController(picker: LGImagePickController, didFinishPickingImages images: [UIImage]) {
         toolBarView.showMore(false)
@@ -381,6 +406,10 @@ extension LGConversationViewController {
     func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
         if text == "\n" {
             let messageStr = textView.text.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+            if messageStr.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) == 0 {
+                return true
+            }
+            
             let message = textMessage(incoming: false, sentDate: NSDate(), iconName: "", text: messageStr)
             let receiveMessage = textMessage(incoming: true, sentDate: NSDate(), iconName: "", text: messageStr)
             
@@ -401,5 +430,3 @@ extension LGConversationViewController {
         }
     }
 }
-
-
