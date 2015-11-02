@@ -166,6 +166,9 @@
 		3502BD641BE231290028CADF /* LGAudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3502BCC91BE231290028CADF /* LGAudioRecorder.swift */; };
 		3502BD651BE231290028CADF /* LGEmotionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3502BCCA1BE231290028CADF /* LGEmotionManager.swift */; };
 		3502BD661BE231290028CADF /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3502BCCB1BE231290028CADF /* Observable.swift */; };
+		352173E91BE734FD0085AD16 /* LGPresentAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 352173E81BE734FD0085AD16 /* LGPresentAnimationController.swift */; };
+		352173EC1BE736270085AD16 /* LGCollectionViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 352173EB1BE736270085AD16 /* LGCollectionViewControllerExtension.swift */; };
+		352173EE1BE73CF10085AD16 /* LGDismissAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 352173ED1BE73CF10085AD16 /* LGDismissAnimationController.swift */; };
 		35F4D3221BE316FD00768E6D /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35F4D3211BE316FD00768E6D /* MapKit.framework */; };
 		35F4D3241BE3170400768E6D /* Contacts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35F4D3231BE3170400768E6D /* Contacts.framework */; };
 		35F4D3261BE3170B00768E6D /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35F4D3251BE3170B00768E6D /* Photos.framework */; };
@@ -356,6 +359,9 @@
 		3502BCC91BE231290028CADF /* LGAudioRecorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LGAudioRecorder.swift; sourceTree = "<group>"; };
 		3502BCCA1BE231290028CADF /* LGEmotionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LGEmotionManager.swift; sourceTree = "<group>"; };
 		3502BCCB1BE231290028CADF /* Observable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
+		352173E81BE734FD0085AD16 /* LGPresentAnimationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LGPresentAnimationController.swift; sourceTree = "<group>"; };
+		352173EB1BE736270085AD16 /* LGCollectionViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LGCollectionViewControllerExtension.swift; sourceTree = "<group>"; };
+		352173ED1BE73CF10085AD16 /* LGDismissAnimationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LGDismissAnimationController.swift; sourceTree = "<group>"; };
 		35F4D3211BE316FD00768E6D /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		35F4D3231BE3170400768E6D /* Contacts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Contacts.framework; path = System/Library/Frameworks/Contacts.framework; sourceTree = SDKROOT; };
 		35F4D3251BE3170B00768E6D /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
@@ -477,9 +483,9 @@
 		3502BC231BE231280028CADF /* imagePick */ = {
 			isa = PBXGroup;
 			children = (
-				3502BC2B1BE231280028CADF /* LGImagePickController.swift */,
-				3502BC251BE231280028CADF /* LGAssetGridViewController.swift */,
-				3502BC291BE231280028CADF /* LGAssetViewController.swift */,
+				352173EA1BE736040085AD16 /* extension */,
+				352173E71BE733E40085AD16 /* transiton */,
+				352173E61BE733D30085AD16 /* controllers */,
 				35A4FA751BE255C800B7060C /* view */,
 				35A4FA741BE255B800B7060C /* viewModel */,
 			);
@@ -722,6 +728,33 @@
 				3502BCCB1BE231290028CADF /* Observable.swift */,
 			);
 			path = utilities;
+			sourceTree = "<group>";
+		};
+		352173E61BE733D30085AD16 /* controllers */ = {
+			isa = PBXGroup;
+			children = (
+				3502BC2B1BE231280028CADF /* LGImagePickController.swift */,
+				3502BC251BE231280028CADF /* LGAssetGridViewController.swift */,
+				3502BC291BE231280028CADF /* LGAssetViewController.swift */,
+			);
+			name = controllers;
+			sourceTree = "<group>";
+		};
+		352173E71BE733E40085AD16 /* transiton */ = {
+			isa = PBXGroup;
+			children = (
+				352173E81BE734FD0085AD16 /* LGPresentAnimationController.swift */,
+				352173ED1BE73CF10085AD16 /* LGDismissAnimationController.swift */,
+			);
+			name = transiton;
+			sourceTree = "<group>";
+		};
+		352173EA1BE736040085AD16 /* extension */ = {
+			isa = PBXGroup;
+			children = (
+				352173EB1BE736270085AD16 /* LGCollectionViewControllerExtension.swift */,
+			);
+			name = extension;
 			sourceTree = "<group>";
 		};
 		35A4FA741BE255B800B7060C /* viewModel */ = {
@@ -1012,6 +1045,8 @@
 				3502BD4A1BE231290028CADF /* LGEmotionView.swift in Sources */,
 				3502BCD51BE231290028CADF /* LGImagePickViewModel.swift in Sources */,
 				3502BD5A1BE231290028CADF /* LGFindViewController.swift in Sources */,
+				352173EC1BE736270085AD16 /* LGCollectionViewControllerExtension.swift in Sources */,
+				352173E91BE734FD0085AD16 /* LGPresentAnimationController.swift in Sources */,
 				3502BD4E1BE231290028CADF /* LGToolBarView.swift in Sources */,
 				3502BD521BE231290028CADF /* LGConversionListBaseCell.swift in Sources */,
 				3502BCCE1BE231290028CADF /* LGAssetModel.swift in Sources */,
@@ -1029,6 +1064,7 @@
 				3502BCCC1BE231290028CADF /* LGAssertGridViewCell.swift in Sources */,
 				3502BD611BE231290028CADF /* LGMeViewController.swift in Sources */,
 				3502BD561BE231290028CADF /* CGRectEx.swift in Sources */,
+				352173EE1BE73CF10085AD16 /* LGDismissAnimationController.swift in Sources */,
 				3502BCD01BE231290028CADF /* LGAssetViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

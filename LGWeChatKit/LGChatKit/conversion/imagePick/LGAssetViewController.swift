@@ -13,8 +13,7 @@ private let reuseIdentifier = "assetviewcell"
 class LGAssetViewController: UIViewController {
     
     var collectionView: UICollectionView!
-    var currentIndex: Int = 0
-    var toolBar: LGAssetToolView!
+    var currentIndex: NSIndexPath!
     var selectButton: UIButton!
     var cellSize: CGSize!
     
@@ -31,28 +30,18 @@ class LGAssetViewController: UIViewController {
         
         setupCollectionView()
         cellSize = (collectionView.collectionViewLayout as! UICollectionViewFlowLayout).itemSize
-        toolBar = LGAssetToolView(leftTitle: "原图", leftSelector: nil, rightSelector: "send", parent: self)
-        toolBar.frame = CGRectMake(0, view.bounds.height - 50, view.bounds.width, 50)
-        toolBar.backgroundColor = UIColor(hexString: "39383d")
-        view.addSubview(toolBar)
-        for assetModel in assetModels {
-            if assetModel.select {
-                toolBar.addSelectCount = 1
-            }
-        }
-        
         collectionView.selectItemAtIndexPath(NSIndexPath(forItem: selectIndex, inSection: 0), animated: false, scrollPosition: .CenteredHorizontally)
     }
     
     func setupCollectionView() {
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSizeMake(view.bounds.width - 20, view.bounds.height - 120)
+        layout.itemSize = CGSizeMake(view.bounds.width, view.bounds.height - 64)
         layout.scrollDirection = .Horizontal
         layout.minimumInteritemSpacing = 0
-        layout.minimumLineSpacing = 20
-        layout.sectionInset = UIEdgeInsetsMake(0, 10, 10, 10)
+        layout.minimumLineSpacing = 0
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: layout)
         collectionView.registerClass(LGAssetViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        collectionView.backgroundColor = UIColor.whiteColor()
         collectionView.pagingEnabled = true
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -81,6 +70,9 @@ class LGAssetViewController: UIViewController {
         let item = UIBarButtonItem(customView: button)
         navigationItem.rightBarButtonItem = item
         selectButton = button
+        
+        let cancelButton = UIBarButtonItem(title: "取消", style: .Done, target: self, action: "dismissView")
+        navigationItem.leftBarButtonItem = cancelButton
     }
     
     func selectCurrentImage() {
@@ -90,20 +82,17 @@ class LGAssetViewController: UIViewController {
         let asset = assetModels[(indexpath?.row)!]
         if asset.select {
             asset.select = false
-            toolBar.addSelectCount = -1
             selectedInfo?.removeObject(cell.imageView.image!)
             selectButton.setImage(UIImage(named: "CellGreySelected"), forState: .Normal)
         } else {
             asset.select = true
-            toolBar.addSelectCount = 1
             selectedInfo?.addObject(cell.imageView.image!)
             selectButton.setImage(UIImage(named: "CellBlueSelected"), forState: .Normal)
         }
     }
     
-    
-    func send() {
-        navigationController?.viewControllers[0].dismissViewControllerAnimated(true, completion: nil)
+    func dismissView() {
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
 }
 
@@ -128,7 +117,9 @@ extension LGAssetViewController: UICollectionViewDataSource, UICollectionViewDel
         } else {
             selectButton.setImage(UIImage(named: "CellGreySelected"), forState: .Normal)
         }
-
+        currentIndex = indexPath
+        self.title = "\(indexPath.row + 1)" + "/" + "\(assetModels.count)"
+        
         return cell
     }
     
@@ -149,15 +140,9 @@ extension LGAssetViewController: UICollectionViewDataSource, UICollectionViewDel
         if UIApplication.sharedApplication().statusBarHidden == false {
             UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: .Slide)
             navigationController?.navigationBar.hidden = true
-            UIView.animateWithDuration(0.3, animations: { () -> Void in
-                self.toolBar.frame = CGRectMake(0, self.view.bounds.height, self.view.bounds.width, 50)
-            })
         } else {
             navigationController?.navigationBar.hidden = false
             UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: .Slide)
-            UIView.animateWithDuration(0.3, animations: { () -> Void in
-                self.toolBar.frame = CGRectMake(0, self.view.bounds.height - 50, self.view.bounds.width, 50)
-            })
         }
     }
 }

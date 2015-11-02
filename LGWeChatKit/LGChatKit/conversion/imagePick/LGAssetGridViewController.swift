@@ -14,8 +14,11 @@ private let itemMargin: CGFloat = 5
 private let durationTime = 0.3
 private let itemSize = (UIScreen.mainScreen().bounds.width - itemMargin * CGFloat(5)) / CGFloat(4)
 
-class LGAssetGridViewController: UICollectionViewController {
-
+class LGAssetGridViewController: UICollectionViewController, UIViewControllerTransitioningDelegate {
+    
+    let presentController = LGPresentAnimationController()
+    let dismissController = LGDismissAnimationController()
+    
     var assetsFetchResults: PHFetchResult! {
         willSet {
             for i in 0...newValue.count - 1 {
@@ -27,6 +30,7 @@ class LGAssetGridViewController: UICollectionViewController {
     }
     
     var toolBar: LGAssetToolView!
+    var assetViewCtrl: LGAssetViewController!
     var assetModels = [LGAssetModel]()
     var selectedInfo: NSMutableArray?
     var previousPreRect: CGRect!
@@ -60,12 +64,12 @@ class LGAssetGridViewController: UICollectionViewController {
         collectionView!.backgroundColor = UIColor.whiteColor()
         // Register cell classes
         self.collectionView!.registerClass(LGAssertGridViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-        
-        // Do any additional setup after loading the view.
+
         previousPreRect = CGRectZero
         toolBar = LGAssetToolView(leftTitle: "预览", leftSelector: "preView", rightSelector: "send", parent: self)
         toolBar.frame = CGRectMake(0, view.bounds.height - 50, view.bounds.width, 50)
         view.addSubview(toolBar)
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -93,6 +97,16 @@ class LGAssetGridViewController: UICollectionViewController {
     
     func send() {
         navigationController?.viewControllers[0].dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    // MARK: - UIViewControllerTransitioningDelegate
+    func animationControllerForDismissedController(dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        self.selectedIndexPath = assetViewCtrl.currentIndex
+        return dismissController
+    }
+    
+    func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return presentController
     }
 }
 
@@ -131,10 +145,14 @@ extension LGAssetGridViewController {
     
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let assetCtrl = LGAssetViewController()
+        self.selectedIndexPath = indexPath
         assetCtrl.assetModels = assetModels
         assetCtrl.selectedInfo = selectedInfo
         assetCtrl.selectIndex = indexPath.row
-        self.navigationController?.pushViewController(assetCtrl, animated: true)
+        self.assetViewCtrl = assetCtrl
+        let nav = UINavigationController(rootViewController: assetCtrl)
+        nav.transitioningDelegate = self
+        self.presentViewController(nav, animated: true, completion: nil)
     }
     
     // MARK: cell button selector
