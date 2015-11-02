@@ -24,7 +24,15 @@ class LGImagePickController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel = PHRootViewModel()
-        viewModel?.getCollectionList()
+        
+        PHPhotoLibrary.requestAuthorization { (authorizationStatus) -> Void  in
+            if authorizationStatus == .Authorized {
+                self.viewModel?.getCollectionList()
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    self.tableView.reloadData()
+                })
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -55,7 +63,6 @@ class LGImagePickController: UITableViewController {
     // MARK: - Table view data source
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return (self.viewModel?.collections.value.count)!
     }
 

@@ -727,10 +727,10 @@
 		35A4FA741BE255B800B7060C /* viewModel */ = {
 			isa = PBXGroup;
 			children = (
-				3502BC2A1BE231280028CADF /* LGAssetViewModel.swift */,
-				3502BC2C1BE231280028CADF /* LGImagePickModel.swift */,
-				3502BC261BE231280028CADF /* LGAssetModel.swift */,
 				3502BC2D1BE231280028CADF /* LGImagePickViewModel.swift */,
+				3502BC2C1BE231280028CADF /* LGImagePickModel.swift */,
+				3502BC2A1BE231280028CADF /* LGAssetViewModel.swift */,
+				3502BC261BE231280028CADF /* LGAssetModel.swift */,
 			);
 			name = viewModel;
 			sourceTree = "<group>";

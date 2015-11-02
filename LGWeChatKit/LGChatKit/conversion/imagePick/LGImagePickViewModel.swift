@@ -18,6 +18,7 @@ class PHRootViewModel {
     
     
     func getCollectionList() {
+    
         let albumOptions = PHFetchOptions()
         albumOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: true)]
         

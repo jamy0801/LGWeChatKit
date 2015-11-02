@@ -163,20 +163,32 @@ class LGConversationViewController: UIViewController, UITableViewDataSource, UIT
        scrollToBottom()
     }
     
+    // MARK: scrollview delegate
+    func scrollViewWillEndDragging(scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        if velocity.y > 2.0 {
+            self.toolBarView.textView.becomeFirstResponder()
+        } else if velocity.y < -0.1 {
+            self.toolBarView.textView.resignFirstResponder()
+        }
+    }
+    
     // MARK: - keyBoard notification
     func keyboardChange(notification: NSNotification) {
         let userInfo = notification.userInfo as NSDictionary!
         let newFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
         let animationTimer = (userInfo[UIKeyboardAnimationDurationUserInfoKey] as! NSNumber).doubleValue
         
+        view.layoutIfNeeded()
         if newFrame.origin.y == UIScreen.mainScreen().bounds.size.height {
             UIView.animateWithDuration(animationTimer, animations: { () -> Void in
                 self.toolBarConstranit.constant = 0
+                self.view.layoutIfNeeded()
             })
         } else {
             UIView.animateWithDuration(animationTimer, animations: { () -> Void in
                self.toolBarConstranit.constant = -newFrame.size.height
                 self.scrollToBottom()
+                self.view.layoutIfNeeded()
             })
         }
     }
