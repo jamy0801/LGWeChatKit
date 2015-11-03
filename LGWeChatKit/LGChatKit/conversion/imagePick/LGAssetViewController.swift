@@ -15,6 +15,7 @@ class LGAssetViewController: UIViewController {
     var collectionView: UICollectionView!
     var currentIndex: NSIndexPath!
     var selectButton: UIButton!
+    var playButton: UIBarButtonItem!
     var cellSize: CGSize!
     
     var assetModels = [LGAssetModel]()
@@ -97,7 +98,7 @@ class LGAssetViewController: UIViewController {
     }
 }
 
-
+// MARK: - collectionView delegate
 extension LGAssetViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -119,22 +120,8 @@ extension LGAssetViewController: UICollectionViewDataSource, UICollectionViewDel
             selectButton.setImage(UIImage(named: "CellGreySelected"), forState: .Normal)
         }
         currentIndex = indexPath
-        self.title = "\(indexPath.row + 1)" + "/" + "\(assetModels.count)"
-        
+  
         return cell
-    }
-    
-    func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
-        let cell = cell as! LGAssetViewCell
-        let assetModel = assetModels[indexPath.row]
-        let viewModel = LGAssetViewModel(assetMode: assetModel)
-        viewModel.updateStaticImage(cellSize)
-        cell.viewModel = viewModel
-        if assetModel.select {
-            selectButton.setImage(UIImage(named: "CellBlueSelected"), forState: .Normal)
-        } else {
-            selectButton.setImage(UIImage(named: "CellGreySelected"), forState: .Normal)
-        }
     }
     
     func imageTapGesture(gesture: UITapGestureRecognizer) {
@@ -147,4 +134,24 @@ extension LGAssetViewController: UICollectionViewDataSource, UICollectionViewDel
         }
     }
 }
+
+// MARK: - scrollView delegate
+extension LGAssetViewController {
+    
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        let offsetX = Int(collectionView.contentOffset.x / view.bounds.width + 0.5)
+        
+         self.title = "\(offsetX + 1)" + "/" + "\(assetModels.count)"
+        if offsetX >= 0 && offsetX < assetModels.count && selectButton != nil {
+            let assetModel = assetModels[offsetX]
+            if assetModel.select {
+                selectButton.setImage(UIImage(named: "CellBlueSelected"), forState: .Normal)
+            } else {
+                selectButton.setImage(UIImage(named: "CellGreySelected"), forState: .Normal)
+            }
+        }
+    }
+}
+
+
 

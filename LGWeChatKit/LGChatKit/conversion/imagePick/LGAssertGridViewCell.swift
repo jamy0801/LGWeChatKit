@@ -34,7 +34,7 @@ class LGAssertGridViewCell: UICollectionViewCell {
         buttonSelect = false
         super.init(frame: frame)
         imageView = UIImageView(frame: bounds)
-        imageView.contentMode = .ScaleToFill
+        //imageView.contentMode = .ScaleAspectFit
         contentView.addSubview(imageView)
         
         selectIndicator.frame = CGRectMake(bounds.width - buttonWidth , 0, buttonWidth, buttonWidth)
@@ -42,7 +42,12 @@ class LGAssertGridViewCell: UICollectionViewCell {
         selectIndicator.setImage(UIImage(named: "CellGreySelected"), forState: .Normal)
         
         backgroundColor = UIColor.whiteColor()
-        imageView.image = UIImage(named: "bike_traveler")
+        
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addConstraint(NSLayoutConstraint(item: imageView, attribute: .Top, relatedBy: .Equal, toItem: contentView, attribute: .Top, multiplier: 1, constant: 0))
+        contentView.addConstraint(NSLayoutConstraint(item: imageView, attribute: .Left, relatedBy: .Equal, toItem: contentView, attribute: .Left, multiplier: 1, constant: 0))
+        contentView.addConstraint(NSLayoutConstraint(item: imageView, attribute: .Right, relatedBy: .Equal, toItem: contentView, attribute: .Right, multiplier: 1, constant: 0))
+        contentView.addConstraint(NSLayoutConstraint(item: imageView, attribute: .Bottom, relatedBy: .Equal, toItem: contentView, attribute: .Bottom, multiplier: 1, constant: 0))
     }
 
     required init?(coder aDecoder: NSCoder) {

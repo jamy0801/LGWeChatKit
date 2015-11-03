@@ -12,7 +12,7 @@ import Photos
 private let reuseIdentifier = "girdCell"
 private let itemMargin: CGFloat = 5
 private let durationTime = 0.3
-private let itemSize = (UIScreen.mainScreen().bounds.width - itemMargin * CGFloat(5)) / CGFloat(4)
+private let itemSize: CGFloat = 80
 
 class LGAssetGridViewController: UICollectionViewController, UIViewControllerTransitioningDelegate {
     

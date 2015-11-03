@@ -282,7 +282,7 @@ class LGConversationViewController: UIViewController, UITableViewDataSource, UIT
 
 // MARK: extension for toobar action
 
-extension LGConversationViewController {
+extension LGConversationViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     func voiceClick(button: UIButton) {
         if toolBarView.recordButton.hidden == false {
@@ -377,7 +377,12 @@ extension LGConversationViewController {
             let nav = UINavigationController(rootViewController: imagePick)
             self.presentViewController(nav, animated: true, completion: nil)
         case .video:
-            NSLog("video")
+            if UIImagePickerController.isSourceTypeAvailable(.Camera) {
+                let imagepick = UIImagePickerController()
+                imagepick.sourceType = .Camera
+                imagepick.delegate = self
+                presentViewController(imagepick, animated: true, completion: nil)
+            }
         case .location:
             let mapCtrl = LGMapViewController()
             mapCtrl.delegate = self
@@ -392,6 +397,18 @@ extension LGConversationViewController {
         let message = imageMessage(incoming: false, sentDate: NSDate(), iconName: "", image: image)
         messageList.append(message)
         reloadTableView()
+    }
+    
+    // MARK: - UIImagePick delegate
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        toolBarView.showMore(false)
+        
+    }
+    
+    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+        toolBarView.showMore(false)
+        picker.dismissViewControllerAnimated(true, completion: nil)
+        
     }
     
     // MARK: - mapview delegate
@@ -413,7 +430,7 @@ extension LGConversationViewController {
         }
     }
     
-    func imagePickerControllerDidCancel(picker: LGImagePickController) {
+    func imagePickerControllerCanceled(picker: LGImagePickController) {
         toolBarView.showMore(false)
     }
     

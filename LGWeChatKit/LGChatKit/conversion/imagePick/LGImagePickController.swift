@@ -12,7 +12,7 @@ import Photos
 
 protocol LGImagePickControllerDelegate {
      func imagePickerController(picker: LGImagePickController, didFinishPickingImages images: [UIImage])
-     func imagePickerControllerDidCancel(picker: LGImagePickController)
+     func imagePickerControllerCanceled(picker: LGImagePickController)
 }
 
 class LGImagePickController: UITableViewController {
@@ -50,7 +50,7 @@ class LGImagePickController: UITableViewController {
     }
     
     func dismissView() {
-        delegate?.imagePickerControllerDidCancel(self)
+        delegate?.imagePickerControllerCanceled(self)
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
@@ -70,8 +70,8 @@ class LGImagePickController: UITableViewController {
         var cell = tableView.dequeueReusableCellWithIdentifier("ImagePickreuseIdentifier")
 
         if cell == nil {
-            cell = UITableViewCell(style: .Value1, reuseIdentifier: "ImagePickreuseIdentifier")
-            cell?.imageView?.contentMode = .ScaleAspectFit
+            cell = UITableViewCell(style: .Subtitle, reuseIdentifier: "ImagePickreuseIdentifier")
+            cell?.imageView?.contentMode = .ScaleToFill
             cell?.accessoryType = .DisclosureIndicator
         }
         let collection = viewModel?.collections.value[indexPath.row]
@@ -104,7 +104,7 @@ class LGImagePickController: UITableViewController {
         if indexPath.row >= viewModel?.collections.value.count {
             return 100
         } else {
-            return CGFloat(64)
+            return CGFloat(75)
         }
     }
 }
