@@ -42,6 +42,7 @@ class LGAssetViewController: UIViewController {
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: layout)
         collectionView.registerClass(LGAssetViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         collectionView.backgroundColor = UIColor.whiteColor()
+        collectionView.showsHorizontalScrollIndicator = false
         collectionView.pagingEnabled = true
         collectionView.dataSource = self
         collectionView.delegate = self

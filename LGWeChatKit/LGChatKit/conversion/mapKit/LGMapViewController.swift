@@ -188,7 +188,7 @@ extension LGMapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
         let location = CLLocation(latitude: centerCoordinate.latitude, longitude: centerCoordinate.longitude)
         geocoder.reverseGeocodeLocation(location) { (placeMarks, error) -> Void in
             if placeMarks?.count > 0 {
-                self.startSearch(centerCoordinate, name: (placeMarks?.first?.thoroughfare)!)
+                self.startSearch(centerCoordinate, name: (placeMarks?.first?.name)!)
             }
         }
     }

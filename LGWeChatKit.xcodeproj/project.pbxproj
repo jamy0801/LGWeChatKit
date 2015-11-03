@@ -331,7 +331,7 @@
 		3502BCA31BE231280028CADF /* LGChatImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LGChatImageCell.swift; sourceTree = "<group>"; };
 		3502BCA41BE231280028CADF /* LGChatTextCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LGChatTextCell.swift; sourceTree = "<group>"; };
 		3502BCA51BE231280028CADF /* LGChatVoiceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LGChatVoiceCell.swift; sourceTree = "<group>"; };
-		3502BCA61BE231280028CADF /* LGEmotionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LGEmotionView.swift; sourceTree = "<group>"; };
+		3502BCA61BE231280028CADF /* LGEmotionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LGEmotionView.swift; path = ../LGEmotionView.swift; sourceTree = "<group>"; };
 		3502BCA81BE231280028CADF /* LGRecordIndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LGRecordIndicatorView.swift; sourceTree = "<group>"; };
 		3502BCA91BE231280028CADF /* LGShareMoreView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LGShareMoreView.swift; sourceTree = "<group>"; };
 		3502BCAA1BE231280028CADF /* LGToolBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LGToolBarView.swift; sourceTree = "<group>"; };
@@ -504,15 +504,11 @@
 		3502BC321BE231280028CADF /* view */ = {
 			isa = PBXGroup;
 			children = (
-				3502BC331BE231280028CADF /* Emotion */,
-				3502BCA21BE231280028CADF /* LGChatBaseCell.swift */,
-				3502BCA31BE231280028CADF /* LGChatImageCell.swift */,
-				3502BCA41BE231280028CADF /* LGChatTextCell.swift */,
-				3502BCA51BE231280028CADF /* LGChatVoiceCell.swift */,
-				3502BCA61BE231280028CADF /* LGEmotionView.swift */,
 				3502BCA81BE231280028CADF /* LGRecordIndicatorView.swift */,
 				3502BCA91BE231280028CADF /* LGShareMoreView.swift */,
 				3502BCAA1BE231280028CADF /* LGToolBarView.swift */,
+				35B1309A1BE852650077C532 /* cells */,
+				3502BC331BE231280028CADF /* Emotion */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -520,6 +516,7 @@
 		3502BC331BE231280028CADF /* Emotion */ = {
 			isa = PBXGroup;
 			children = (
+				3502BCA61BE231280028CADF /* LGEmotionView.swift */,
 				3502BC341BE231280028CADF /* EmotionResource */,
 			);
 			path = Emotion;
@@ -776,6 +773,17 @@
 				3502BC281BE231280028CADF /* LGAssetViewCell.swift */,
 			);
 			name = view;
+			sourceTree = "<group>";
+		};
+		35B1309A1BE852650077C532 /* cells */ = {
+			isa = PBXGroup;
+			children = (
+				3502BCA21BE231280028CADF /* LGChatBaseCell.swift */,
+				3502BCA31BE231280028CADF /* LGChatImageCell.swift */,
+				3502BCA41BE231280028CADF /* LGChatTextCell.swift */,
+				3502BCA51BE231280028CADF /* LGChatVoiceCell.swift */,
+			);
+			name = cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

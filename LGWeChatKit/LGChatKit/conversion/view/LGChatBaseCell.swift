@@ -98,12 +98,7 @@ class LGChatBaseCell: UITableViewCell {
     
     func setMessage(message: Message) {
         
-        if message.dataString.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) < 1 {
-            timeLabel.hidden = true
-        } else {
-            timeLabel.hidden = false
-            timeLabel.text = message.dataString
-        }
+        timeLabel.text = message.dataString
         
         if message.iconName.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) > 0 {
             if let image = UIImage(named: message.iconName) {

@@ -139,7 +139,15 @@ class LGConversationViewController: UIViewController, UITableViewDataSource, UIT
         cell.backgroundImageView.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: action))
         cell.backgroundImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "clickCellAction:"))
         
-        
+        if indexPath.row > 0 {
+            let preMessage = messageList[indexPath.row - 1]
+            if preMessage.dataString == message.dataString {
+                cell.timeLabel.hidden = true
+            } else {
+                cell.timeLabel.hidden = false
+            }
+        }
+
         cell.setMessage(message)
         
         return cell
@@ -411,7 +419,12 @@ extension LGConversationViewController {
     
     // MARK: - emojiDelegate
     func selectEmoji(code: String, description: String, delete: Bool) {
-        NSLog("%@--%@", code, description)
+        if delete {
+            let range = Range(start: toolBarView.textView.text.endIndex.advancedBy(-1), end: toolBarView.textView.text.endIndex)
+            toolBarView.textView.text.removeRange(range)
+        } else {
+            toolBarView.textView.text.appendContentsOf(code)
+        }
     }
     
     // MARK: - textViewDelegate
