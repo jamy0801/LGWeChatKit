@@ -108,12 +108,12 @@ extension LGAssetViewController: UICollectionViewDataSource, UICollectionViewDel
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! LGAssetViewCell
-        cell.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "imageTapGesture:"))
+      //  cell.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "imageTapGesture:"))
         let assetModel = assetModels[indexPath.row]
         let viewModel = LGAssetViewModel(assetMode: assetModel)
-        viewModel.updateStaticImage(cellSize)
+        viewModel.updateImage(cellSize)
         cell.viewModel = viewModel
-        
+
         if assetModel.select {
             selectButton.setImage(UIImage(named: "CellBlueSelected"), forState: .Normal)
         } else {
@@ -124,15 +124,35 @@ extension LGAssetViewController: UICollectionViewDataSource, UICollectionViewDel
         return cell
     }
     
-    func imageTapGesture(gesture: UITapGestureRecognizer) {
-        if UIApplication.sharedApplication().statusBarHidden == false {
-            UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: .Slide)
-            navigationController?.navigationBar.hidden = true
-        } else {
-            navigationController?.navigationBar.hidden = false
-            UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: .Slide)
+    func collectionView(collectionView: UICollectionView, didEndDisplayingCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
+        let assetModel = assetModels[indexPath.row]
+        let viewModel = LGAssetViewModel(assetMode: assetModel)
+        
+        let cell = cell as! LGAssetViewCell
+        if viewModel.livePhoto.value.size.width != 0 || (viewModel.asset.value.mediaType == .Video) {
+            cell.stopPlayer()
         }
     }
+    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        
+        let assetModel = assetModels[indexPath.row]
+        let viewModel = LGAssetViewModel(assetMode: assetModel)
+        
+        let cell = collectionView.cellForItemAtIndexPath(indexPath) as! LGAssetViewCell
+        if viewModel.livePhoto.value.size.width != 0 || (viewModel.asset.value.mediaType == .Video) {
+            cell.playLivePhoto()
+        } else {
+            if UIApplication.sharedApplication().statusBarHidden == false {
+                UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: .Slide)
+                navigationController?.navigationBar.hidden = true
+            } else {
+                navigationController?.navigationBar.hidden = false
+                UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: .Slide)
+            }
+        }
+    }
+    
 }
 
 // MARK: - scrollView delegate
