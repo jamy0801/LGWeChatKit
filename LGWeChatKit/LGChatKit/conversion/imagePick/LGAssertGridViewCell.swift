@@ -13,8 +13,17 @@ class LGAssertGridViewCell: UICollectionViewCell {
     let buttonWidth: CGFloat = 30
     var assetIdentifier: String!
     var imageView:UIImageView!
+    var playIndicator: UIImageView?
     var selectIndicator: UIButton
-    var assetModel: LGAssetModel!
+    var assetModel: LGAssetModel! {
+        didSet {
+            if assetModel.asset.mediaType == .Video {
+                self.playIndicator?.hidden = false
+            } else {
+                self.playIndicator?.hidden = true
+            }
+        }
+    }
     var buttonSelect: Bool {
         willSet {
             if newValue {
@@ -36,6 +45,12 @@ class LGAssertGridViewCell: UICollectionViewCell {
         imageView = UIImageView(frame: bounds)
         //imageView.contentMode = .ScaleAspectFit
         contentView.addSubview(imageView)
+        
+        playIndicator = UIImageView(frame: CGRectMake(0, 0, 60, 60))
+        playIndicator?.center = contentView.center
+        playIndicator?.image = UIImage(named: "mmplayer_idle")
+        contentView.addSubview(playIndicator!)
+        playIndicator?.hidden = true
         
         selectIndicator.frame = CGRectMake(bounds.width - buttonWidth , 0, buttonWidth, buttonWidth)
         contentView.addSubview(selectIndicator)

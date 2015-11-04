@@ -769,8 +769,8 @@
 			isa = PBXGroup;
 			children = (
 				3502BC241BE231280028CADF /* LGAssertGridViewCell.swift */,
-				3502BC271BE231280028CADF /* LGAssetToolView.swift */,
 				3502BC281BE231280028CADF /* LGAssetViewCell.swift */,
+				3502BC271BE231280028CADF /* LGAssetToolView.swift */,
 			);
 			name = view;
 			sourceTree = "<group>";
