@@ -89,15 +89,18 @@ swift2.0仿微信界面，可滑动cell,自定义图片选择器,视频播放。
  ```
  
  ### 聊天界面
- 支持视频的发送和播放：
+ 
+ #### 支持视频的发送和播放：
+ 
   ![](https://github.com/jamy0801/LGWeChatKit/blob/master/gif/video.gif)
 
 
- 支持录音播放功能~
+ #### 支持录音播放功能
  
   ![](https://github.com/jamy0801/LGWeChatKit/blob/master/gif/voice.gif)
  
- ### 文本输入
+ #### 文本输入
+ 
  支持文字粘贴复制等功能
  
   ![](https://github.com/jamy0801/LGWeChatKit/blob/master/gif/paste.gif)
