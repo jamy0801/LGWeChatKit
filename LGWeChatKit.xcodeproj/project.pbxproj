@@ -174,6 +174,8 @@
 		352FA1071BE9F79500CAD8B7 /* LGChatVideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 352FA1061BE9F79500CAD8B7 /* LGChatVideoCell.swift */; };
 		355C21491BEA309800EBD882 /* LGVideoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 355C21481BEA309800EBD882 /* LGVideoController.swift */; };
 		35A050951BEA373E006DB583 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35A050941BEA373E006DB583 /* AVFoundation.framework */; };
+		35C695991BEB01DE0006B6AB /* MessageIncoming.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 35C695971BEB01DE0006B6AB /* MessageIncoming.aiff */; };
+		35C6959A1BEB01DE0006B6AB /* MessageOutgoing.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 35C695981BEB01DE0006B6AB /* MessageOutgoing.aiff */; };
 		35F4D3221BE316FD00768E6D /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35F4D3211BE316FD00768E6D /* MapKit.framework */; };
 		35F4D3241BE3170400768E6D /* Contacts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35F4D3231BE3170400768E6D /* Contacts.framework */; };
 		35F4D3261BE3170B00768E6D /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35F4D3251BE3170B00768E6D /* Photos.framework */; };
@@ -372,6 +374,8 @@
 		352FA1061BE9F79500CAD8B7 /* LGChatVideoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LGChatVideoCell.swift; sourceTree = "<group>"; };
 		355C21481BEA309800EBD882 /* LGVideoController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LGVideoController.swift; sourceTree = "<group>"; };
 		35A050941BEA373E006DB583 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		35C695971BEB01DE0006B6AB /* MessageIncoming.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = MessageIncoming.aiff; sourceTree = "<group>"; };
+		35C695981BEB01DE0006B6AB /* MessageOutgoing.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = MessageOutgoing.aiff; sourceTree = "<group>"; };
 		35F4D3211BE316FD00768E6D /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		35F4D3231BE3170400768E6D /* Contacts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Contacts.framework; path = System/Library/Frameworks/Contacts.framework; sourceTree = SDKROOT; };
 		35F4D3251BE3170B00768E6D /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
@@ -777,6 +781,8 @@
 		352FA1031BE9F5E200CAD8B7 /* supports */ = {
 			isa = PBXGroup;
 			children = (
+				35C695971BEB01DE0006B6AB /* MessageIncoming.aiff */,
+				35C695981BEB01DE0006B6AB /* MessageOutgoing.aiff */,
 				352FA1041BE9F5FB00CAD8B7 /* test.m4v */,
 				3502BBFA1BE22FB80028CADF /* Assets.xcassets */,
 				3502BBFC1BE22FB80028CADF /* LaunchScreen.storyboard */,
@@ -962,6 +968,7 @@
 				3502BD2A1BE231290028CADF /* Expression_75@2x.png in Resources */,
 				3502BCE01BE231290028CADF /* Expression_103@2x.png in Resources */,
 				3502BD421BE231290028CADF /* Expression_97@2x.png in Resources */,
+				35C695991BEB01DE0006B6AB /* MessageIncoming.aiff in Resources */,
 				3502BD011BE231290028CADF /* Expression_38@2x.png in Resources */,
 				3502BD241BE231290028CADF /* Expression_6@2x.png in Resources */,
 				3502BCFC1BE231290028CADF /* Expression_33@2x.png in Resources */,
@@ -970,6 +977,7 @@
 				3502BCEC1BE231290028CADF /* Expression_19@2x.png in Resources */,
 				3502BD081BE231290028CADF /* Expression_44@2x.png in Resources */,
 				3502BD381BE231290028CADF /* Expression_88@2x.png in Resources */,
+				35C6959A1BEB01DE0006B6AB /* MessageOutgoing.aiff in Resources */,
 				3502BD171BE231290028CADF /* Expression_58@2x.png in Resources */,
 				3502BD361BE231290028CADF /* Expression_86@2x.png in Resources */,
 				3502BCF01BE231290028CADF /* Expression_22@2x.png in Resources */,

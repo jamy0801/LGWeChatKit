@@ -13,6 +13,22 @@ import AVFoundation
 let toolBarMinHeight: CGFloat = 44.0
 let indicatorViewH: CGFloat = 120
 
+let messageOutSound: SystemSoundID = {
+    var soundID: SystemSoundID = 10120
+    let soundUrl = CFBundleCopyResourceURL(CFBundleGetMainBundle(), "MessageOutgoing", "aiff", nil)
+    AudioServicesCreateSystemSoundID(soundUrl, &soundID)
+    return soundID
+}()
+
+
+let messageInSound: SystemSoundID = {
+    var soundID: SystemSoundID = 10121
+    let soundUrl = CFBundleCopyResourceURL(CFBundleGetMainBundle(), "MessageIncoming", "aiff", nil)
+    AudioServicesCreateSystemSoundID(soundUrl, &soundID)
+    return soundID
+}()
+
+
 class LGConversationViewController: UIViewController, UITableViewDataSource, UITableViewDelegate , UITextViewDelegate {
     
     var tableView: UITableView!
@@ -156,6 +172,11 @@ class LGConversationViewController: UIViewController, UITableViewDataSource, UIT
         cell.setMessage(message)
         
         return cell
+    }
+    
+    
+    func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
+        return nil
     }
     
     func scrollToBottom() {
@@ -335,6 +356,7 @@ extension LGConversationViewController: UIImagePickerControllerDelegate, UINavig
             reloadTableView()
             messageList.append(receiveMessage)
             reloadTableView()
+            AudioServicesPlayAlertSound(messageOutSound)
         }
     }
     
@@ -393,6 +415,7 @@ extension LGConversationViewController: UIImagePickerControllerDelegate, UINavig
             let message = videoMessage(incoming: false, sentDate: NSDate(), iconName: "", url: url)
             messageList.append(message)
             reloadTableView()
+            AudioServicesPlayAlertSound(messageOutSound)
             toolBarView.showMore(false)
             self.view.endEditing(true)
         case .location:
@@ -408,6 +431,7 @@ extension LGConversationViewController: UIImagePickerControllerDelegate, UINavig
     func sendImage(image: UIImage) {
         let message = imageMessage(incoming: false, sentDate: NSDate(), iconName: "", image: image)
         messageList.append(message)
+        AudioServicesPlayAlertSound(messageOutSound)
         reloadTableView()
     }
     
@@ -470,7 +494,7 @@ extension LGConversationViewController: UIImagePickerControllerDelegate, UINavig
             reloadTableView()
             messageList.append(receiveMessage)
             reloadTableView()
-            
+            AudioServicesPlayAlertSound(messageOutSound)
             textView.text = ""
             return false
         }
