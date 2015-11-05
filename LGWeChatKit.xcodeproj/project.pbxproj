@@ -169,6 +169,11 @@
 		352173E91BE734FD0085AD16 /* LGPresentAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 352173E81BE734FD0085AD16 /* LGPresentAnimationController.swift */; };
 		352173EC1BE736270085AD16 /* LGCollectionViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 352173EB1BE736270085AD16 /* LGCollectionViewControllerExtension.swift */; };
 		352173EE1BE73CF10085AD16 /* LGDismissAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 352173ED1BE73CF10085AD16 /* LGDismissAnimationController.swift */; };
+		352FA1021BE9F5CE00CAD8B7 /* LGAVPlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 352FA1011BE9F5CE00CAD8B7 /* LGAVPlayView.swift */; };
+		352FA1051BE9F5FB00CAD8B7 /* test.m4v in Resources */ = {isa = PBXBuildFile; fileRef = 352FA1041BE9F5FB00CAD8B7 /* test.m4v */; };
+		352FA1071BE9F79500CAD8B7 /* LGChatVideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 352FA1061BE9F79500CAD8B7 /* LGChatVideoCell.swift */; };
+		355C21491BEA309800EBD882 /* LGVideoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 355C21481BEA309800EBD882 /* LGVideoController.swift */; };
+		35A050951BEA373E006DB583 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35A050941BEA373E006DB583 /* AVFoundation.framework */; };
 		35F4D3221BE316FD00768E6D /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35F4D3211BE316FD00768E6D /* MapKit.framework */; };
 		35F4D3241BE3170400768E6D /* Contacts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35F4D3231BE3170400768E6D /* Contacts.framework */; };
 		35F4D3261BE3170B00768E6D /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35F4D3251BE3170B00768E6D /* Photos.framework */; };
@@ -362,6 +367,11 @@
 		352173E81BE734FD0085AD16 /* LGPresentAnimationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LGPresentAnimationController.swift; sourceTree = "<group>"; };
 		352173EB1BE736270085AD16 /* LGCollectionViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LGCollectionViewControllerExtension.swift; sourceTree = "<group>"; };
 		352173ED1BE73CF10085AD16 /* LGDismissAnimationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LGDismissAnimationController.swift; sourceTree = "<group>"; };
+		352FA1011BE9F5CE00CAD8B7 /* LGAVPlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LGAVPlayView.swift; sourceTree = "<group>"; };
+		352FA1041BE9F5FB00CAD8B7 /* test.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = test.m4v; sourceTree = "<group>"; };
+		352FA1061BE9F79500CAD8B7 /* LGChatVideoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LGChatVideoCell.swift; sourceTree = "<group>"; };
+		355C21481BEA309800EBD882 /* LGVideoController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LGVideoController.swift; sourceTree = "<group>"; };
+		35A050941BEA373E006DB583 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		35F4D3211BE316FD00768E6D /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		35F4D3231BE3170400768E6D /* Contacts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Contacts.framework; path = System/Library/Frameworks/Contacts.framework; sourceTree = SDKROOT; };
 		35F4D3251BE3170B00768E6D /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
@@ -374,6 +384,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				35A050951BEA373E006DB583 /* AVFoundation.framework in Frameworks */,
 				35F4D32A1BE3171A00768E6D /* VideoToolbox.framework in Frameworks */,
 				35F4D3281BE3171300768E6D /* AudioToolbox.framework in Frameworks */,
 				35F4D3261BE3170B00768E6D /* Photos.framework in Frameworks */,
@@ -402,6 +413,7 @@
 		3502BBE71BE22FB70028CADF = {
 			isa = PBXGroup;
 			children = (
+				35A050941BEA373E006DB583 /* AVFoundation.framework */,
 				35F4D3291BE3171A00768E6D /* VideoToolbox.framework */,
 				35F4D3271BE3171300768E6D /* AudioToolbox.framework */,
 				35F4D3251BE3170B00768E6D /* Photos.framework */,
@@ -429,9 +441,7 @@
 			children = (
 				3502BC211BE231280028CADF /* LGChatKit */,
 				3502BBF31BE22FB80028CADF /* AppDelegate.swift */,
-				3502BBFA1BE22FB80028CADF /* Assets.xcassets */,
-				3502BBFC1BE22FB80028CADF /* LaunchScreen.storyboard */,
-				3502BBFF1BE22FB80028CADF /* Info.plist */,
+				352FA1031BE9F5E200CAD8B7 /* supports */,
 			);
 			path = LGWeChatKit;
 			sourceTree = "<group>";
@@ -472,6 +482,7 @@
 			isa = PBXGroup;
 			children = (
 				3502BC2E1BE231280028CADF /* LGConversationViewController.swift */,
+				352FA1001BE9F5BD00CAD8B7 /* video */,
 				3502BC231BE231280028CADF /* imagePick */,
 				3502BC2F1BE231280028CADF /* mapKit */,
 				3502BC321BE231280028CADF /* view */,
@@ -754,6 +765,26 @@
 			name = extension;
 			sourceTree = "<group>";
 		};
+		352FA1001BE9F5BD00CAD8B7 /* video */ = {
+			isa = PBXGroup;
+			children = (
+				352FA1011BE9F5CE00CAD8B7 /* LGAVPlayView.swift */,
+				355C21481BEA309800EBD882 /* LGVideoController.swift */,
+			);
+			path = video;
+			sourceTree = "<group>";
+		};
+		352FA1031BE9F5E200CAD8B7 /* supports */ = {
+			isa = PBXGroup;
+			children = (
+				352FA1041BE9F5FB00CAD8B7 /* test.m4v */,
+				3502BBFA1BE22FB80028CADF /* Assets.xcassets */,
+				3502BBFC1BE22FB80028CADF /* LaunchScreen.storyboard */,
+				3502BBFF1BE22FB80028CADF /* Info.plist */,
+			);
+			name = supports;
+			sourceTree = "<group>";
+		};
 		35A4FA741BE255B800B7060C /* viewModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -782,6 +813,7 @@
 				3502BCA31BE231280028CADF /* LGChatImageCell.swift */,
 				3502BCA41BE231280028CADF /* LGChatTextCell.swift */,
 				3502BCA51BE231280028CADF /* LGChatVoiceCell.swift */,
+				352FA1061BE9F79500CAD8B7 /* LGChatVideoCell.swift */,
 			);
 			name = cells;
 			sourceTree = "<group>";
@@ -906,6 +938,7 @@
 				3502BD311BE231290028CADF /* Expression_81@2x.png in Resources */,
 				3502BCF11BE231290028CADF /* Expression_23@2x.png in Resources */,
 				3502BCEB1BE231290028CADF /* Expression_18@2x.png in Resources */,
+				352FA1051BE9F5FB00CAD8B7 /* test.m4v in Resources */,
 				3502BD351BE231290028CADF /* Expression_85@2x.png in Resources */,
 				3502BD0C1BE231290028CADF /* Expression_48@2x.png in Resources */,
 				3502BD1A1BE231290028CADF /* Expression_60@2x.png in Resources */,
@@ -1047,10 +1080,12 @@
 				3502BD491BE231290028CADF /* LGChatVoiceCell.swift in Sources */,
 				3502BD481BE231290028CADF /* LGChatTextCell.swift in Sources */,
 				3502BCD41BE231290028CADF /* LGImagePickModel.swift in Sources */,
+				355C21491BEA309800EBD882 /* LGVideoController.swift in Sources */,
 				3502BD661BE231290028CADF /* Observable.swift in Sources */,
 				3502BD651BE231290028CADF /* LGEmotionManager.swift in Sources */,
 				3502BCD61BE231290028CADF /* LGConversationViewController.swift in Sources */,
 				3502BD4A1BE231290028CADF /* LGEmotionView.swift in Sources */,
+				352FA1021BE9F5CE00CAD8B7 /* LGAVPlayView.swift in Sources */,
 				3502BCD51BE231290028CADF /* LGImagePickViewModel.swift in Sources */,
 				3502BD5A1BE231290028CADF /* LGFindViewController.swift in Sources */,
 				352173EC1BE736270085AD16 /* LGCollectionViewControllerExtension.swift in Sources */,
@@ -1067,6 +1102,7 @@
 				3502BD461BE231290028CADF /* LGChatBaseCell.swift in Sources */,
 				3502BD4D1BE231290028CADF /* LGShareMoreView.swift in Sources */,
 				3502BD571BE231290028CADF /* LGColorEx.swift in Sources */,
+				352FA1071BE9F79500CAD8B7 /* LGChatVideoCell.swift in Sources */,
 				3502BD501BE231290028CADF /* LGConversationListController.swift in Sources */,
 				3502BD641BE231290028CADF /* LGAudioRecorder.swift in Sources */,
 				3502BCCC1BE231290028CADF /* LGAssertGridViewCell.swift in Sources */,

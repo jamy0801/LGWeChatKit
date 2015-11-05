@@ -13,13 +13,14 @@ import AVFoundation
 let toolBarMinHeight: CGFloat = 44.0
 let indicatorViewH: CGFloat = 120
 
-class LGConversationViewController: UIViewController, UITableViewDataSource, UITableViewDelegate , UITextViewDelegate, LGAudioRecorderDelegate, LGEmotionViewDelegate, LGImagePickControllerDelegate, LGMapViewControllerDelegate{
+class LGConversationViewController: UIViewController, UITableViewDataSource, UITableViewDelegate , UITextViewDelegate {
     
     var tableView: UITableView!
     var toolBarView: LGToolBarView!
     var emojiView: LGEmotionView!
     var shareView: LGShareMoreView!
     var recordIndicatorView: LGRecordIndicatorView!
+    var videoController: LGVideoController!
     
     var messageList = [Message]()
     
@@ -52,10 +53,12 @@ class LGConversationViewController: UIViewController, UITableViewDataSource, UIT
         tableView.estimatedRowHeight = 44.0
         tableView.contentInset = UIEdgeInsetsMake(0, 0, toolBarMinHeight / 2, 0)
         tableView.separatorStyle = .None
+        
         tableView.registerClass(LGChatImageCell.self, forCellReuseIdentifier: NSStringFromClass(LGChatImageCell))
         tableView.registerClass(LGChatTextCell.self, forCellReuseIdentifier: NSStringFromClass(LGChatTextCell))
         tableView.registerClass(LGChatVoiceCell.self, forCellReuseIdentifier: NSStringFromClass(LGChatVoiceCell))
-    
+        tableView.registerClass(LGChatVideoCell.self, forCellReuseIdentifier: NSStringFromClass(LGChatVideoCell))
+        
         view.addSubview(tableView)
         
         recordIndicatorView = LGRecordIndicatorView(frame: CGRectMake(self.view.center.x - indicatorViewH / 2, self.view.center.y - indicatorViewH / 3, indicatorViewH, indicatorViewH))
@@ -129,6 +132,8 @@ class LGConversationViewController: UIViewController, UITableViewDataSource, UIT
             cell = tableView.dequeueReusableCellWithIdentifier(NSStringFromClass(LGChatImageCell), forIndexPath: indexPath) as! LGChatImageCell
         case .Voice:
             cell = tableView.dequeueReusableCellWithIdentifier(NSStringFromClass(LGChatVoiceCell), forIndexPath: indexPath) as! LGChatVoiceCell
+        case .Video:
+            cell = tableView.dequeueReusableCellWithIdentifier(NSStringFromClass(LGChatVideoCell), forIndexPath: indexPath) as! LGChatVideoCell
         }
         
         // add gustureRecognizer to show menu items
@@ -153,27 +158,25 @@ class LGConversationViewController: UIViewController, UITableViewDataSource, UIT
         return cell
     }
     
-    func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
-        return nil
-    }
-    
     func scrollToBottom() {
-        if messageList.count <= 1 {
-            return
+        let numberOfRows = tableView.numberOfRowsInSection(0)
+        if numberOfRows > 0 {
+            tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: numberOfRows - 1, inSection: 0), atScrollPosition: .Bottom, animated: true)
         }
-        
-        let indexPath = NSIndexPath(forRow: messageList.count - 1, inSection: 0)
-       tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: .Bottom, animated: true)
     }
     
     func reloadTableView() {
-        tableView.reloadData()
+        let count = messageList.count
+        tableView.beginUpdates()
+        tableView.insertRowsAtIndexPaths([NSIndexPath(forRow: count - 1, inSection: 0)], withRowAnimation: .Top)
+        tableView.endUpdates()
        scrollToBottom()
     }
     
     // MARK: scrollview delegate
     func scrollViewWillEndDragging(scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         if velocity.y > 2.0 {
+            scrollToBottom()
             self.toolBarView.textView.becomeFirstResponder()
         } else if velocity.y < -0.1 {
             self.toolBarView.textView.resignFirstResponder()
@@ -265,7 +268,7 @@ class LGConversationViewController: UIViewController, UITableViewDataSource, UIT
         let pressCell = tableView.cellForRowAtIndexPath(pressIndexPath)
         let message = messageList[pressIndexPath.row]
         
-        if message.messageType == LGMessageType.Voice {
+        if message.messageType == .Voice {
             let message = message as! voiceMessage
             let cell = pressCell as! LGChatVoiceCell
             let play = LGAudioPlayer()
@@ -276,13 +279,21 @@ class LGConversationViewController: UIViewController, UITableViewDataSource, UIT
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(message.voiceTime.intValue) * 1000 * 1000 * 1000), dispatch_get_main_queue(), { () -> Void in
                 cell.stopAnimation()
             })
+        } else if message.messageType == .Video {
+            let message = message as! videoMessage
+            if videoController != nil {
+                videoController = nil
+            }
+            videoController = LGVideoController()
+            videoController.setPlayUrl(message.url)
+            presentViewController(videoController, animated: true, completion: nil)
         }
     }
 }
 
 // MARK: extension for toobar action
 
-extension LGConversationViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+extension LGConversationViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate, LGAudioRecorderDelegate, LGEmotionViewDelegate, LGImagePickControllerDelegate, LGMapViewControllerDelegate {
 
     func voiceClick(button: UIButton) {
         if toolBarView.recordButton.hidden == false {
@@ -321,6 +332,7 @@ extension LGConversationViewController: UIImagePickerControllerDelegate, UINavig
             let receiveMessage = voiceMessage(incoming: true, sentDate: NSDate(), iconName: "", voicePath: recorder.recorder.url, voiceTime: recorder.timeInterval)
             
             messageList.append(message)
+            reloadTableView()
             messageList.append(receiveMessage)
             reloadTableView()
         }
@@ -377,12 +389,12 @@ extension LGConversationViewController: UIImagePickerControllerDelegate, UINavig
             let nav = UINavigationController(rootViewController: imagePick)
             self.presentViewController(nav, animated: true, completion: nil)
         case .video:
-            if UIImagePickerController.isSourceTypeAvailable(.Camera) {
-                let imagepick = UIImagePickerController()
-                imagepick.sourceType = .Camera
-                imagepick.delegate = self
-                presentViewController(imagepick, animated: true, completion: nil)
-            }
+            let url = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("test", ofType: "m4v")!)
+            let message = videoMessage(incoming: false, sentDate: NSDate(), iconName: "", url: url)
+            messageList.append(message)
+            reloadTableView()
+            toolBarView.showMore(false)
+            self.view.endEditing(true)
         case .location:
             let mapCtrl = LGMapViewController()
             mapCtrl.delegate = self
@@ -402,7 +414,6 @@ extension LGConversationViewController: UIImagePickerControllerDelegate, UINavig
     // MARK: - UIImagePick delegate
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         toolBarView.showMore(false)
-        
     }
     
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
@@ -456,9 +467,10 @@ extension LGConversationViewController: UIImagePickerControllerDelegate, UINavig
             let receiveMessage = textMessage(incoming: true, sentDate: NSDate(), iconName: "", text: messageStr)
             
             messageList.append(message)
-            messageList.append(receiveMessage)
-            
             reloadTableView()
+            messageList.append(receiveMessage)
+            reloadTableView()
+            
             textView.text = ""
             return false
         }

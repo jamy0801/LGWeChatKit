@@ -28,6 +28,7 @@ class LGChatVoiceCell: LGChatBaseCell {
         voicePlayIndicatorImageView.addConstraint(NSLayoutConstraint(item: voicePlayIndicatorImageView, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 17))
         backgroundImageView.addConstraint(NSLayoutConstraint(item: voicePlayIndicatorImageView, attribute: .Left, relatedBy: .Equal, toItem: backgroundImageView, attribute: .Left, multiplier: 1, constant: 15))
         backgroundImageView.addConstraint(NSLayoutConstraint(item: voicePlayIndicatorImageView, attribute: .CenterY, relatedBy: .Equal, toItem: backgroundImageView, attribute: .CenterY, multiplier: 1, constant: -5))
+        contentView.addConstraint(NSLayoutConstraint(item: backgroundImageView, attribute: .Bottom, relatedBy: .Equal, toItem: contentView, attribute: .Bottom, multiplier: 1, constant: -5))
     }
 
     required init?(coder aDecoder: NSCoder) {

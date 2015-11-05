@@ -22,6 +22,9 @@ class LGChatBaseCell: UITableViewCell {
     let timeLabel: UILabel                  // show timer
     let indicatorView: UIButton             // indicator the message status
     
+    var iconContraintNotime: NSLayoutConstraint!
+    var iconContraintWithTime: NSLayoutConstraint!
+    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         
         iconImageView = UIImageView(image: UIImage(named: "DefaultHead"))
@@ -68,27 +71,24 @@ class LGChatBaseCell: UITableViewCell {
         
         // iconView constraint
         contentView.addConstraint(NSLayoutConstraint(item: iconImageView, attribute: .Left, relatedBy: .Equal, toItem: contentView, attribute: .Left, multiplier: 1, constant: 10))
-        if timeLabel.hidden {
-            contentView.addConstraint(NSLayoutConstraint(item: iconImageView, attribute: .Top, relatedBy: .Equal, toItem: contentView, attribute: .Top, multiplier: 1, constant: 10))
-        }
-        else
-        {
-            contentView.addConstraint(NSLayoutConstraint(item: iconImageView, attribute: .Top, relatedBy: .Equal, toItem: timeLabel, attribute: .Bottom, multiplier: 1, constant: 5))
-        }
+        
         iconImageView.addConstraint(NSLayoutConstraint(item: iconImageView, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 45))
         iconImageView.addConstraint(NSLayoutConstraint(item: iconImageView, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 45))
         
         // background constraint
         contentView.addConstraint(NSLayoutConstraint(item: backgroundImageView, attribute: .Left, relatedBy: .Equal, toItem: iconImageView, attribute: .Right, multiplier: 1, constant: 10))
         contentView.addConstraint(NSLayoutConstraint(item: backgroundImageView, attribute: .Top, relatedBy: .Equal, toItem: iconImageView, attribute: .Top, multiplier: 1, constant: 0))
-        contentView.addConstraint(NSLayoutConstraint(item: backgroundImageView, attribute: .Bottom, relatedBy: .Equal, toItem: contentView, attribute: .Bottom, multiplier: 1, constant: -5))
-        
+       
         // indicator constraint
         indicatorView.addConstraint(NSLayoutConstraint(item: indicatorView, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 17))
         indicatorView.addConstraint(NSLayoutConstraint(item: indicatorView, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 17))
         contentView.addConstraint(NSLayoutConstraint(item: indicatorView, attribute: .CenterY, relatedBy: .Equal, toItem: backgroundImageView, attribute: .CenterY, multiplier: 1, constant: -5))
         contentView.addConstraint(NSLayoutConstraint(item: indicatorView, attribute: .Left, relatedBy: .Equal, toItem: backgroundImageView, attribute: .Right, multiplier: 1, constant: 0))
         
+        iconContraintNotime = NSLayoutConstraint(item: iconImageView, attribute: .Top, relatedBy: .Equal, toItem: contentView, attribute: .Top, multiplier: 1, constant: 10)
+        iconContraintWithTime = NSLayoutConstraint(item: iconImageView, attribute: .Top, relatedBy: .Equal, toItem: timeLabel, attribute: .Bottom, multiplier: 1, constant: 5)
+    
+        contentView.addConstraint(iconContraintWithTime)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -96,9 +96,20 @@ class LGChatBaseCell: UITableViewCell {
     }
     
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        contentView.addConstraint(iconContraintWithTime)
+    }
+    
     func setMessage(message: Message) {
         
-        timeLabel.text = message.dataString
+        if !timeLabel.hidden {
+            contentView.removeConstraint(iconContraintNotime)
+            timeLabel.text = message.dataString
+        } else {
+            contentView.removeConstraint(iconContraintWithTime)
+            contentView.addConstraint(iconContraintNotime)
+        }
         
         if message.iconName.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) > 0 {
             if let image = UIImage(named: message.iconName) {

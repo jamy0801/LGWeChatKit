@@ -31,6 +31,7 @@ class LGChatTextCell: LGChatBaseCell {
         backgroundImageView.addConstraint(NSLayoutConstraint(item: messageLabel, attribute: .CenterY, relatedBy: .Equal, toItem: backgroundImageView, attribute: .CenterY, multiplier: 1, constant: -5))
         messageLabel.preferredMaxLayoutWidth = 210
         backgroundImageView.addConstraint(NSLayoutConstraint(item: messageLabel, attribute: .Height, relatedBy: .Equal, toItem: backgroundImageView, attribute: .Height, multiplier: 1, constant: -30))
+        contentView.addConstraint(NSLayoutConstraint(item: backgroundImageView, attribute: .Bottom, relatedBy: .Equal, toItem: contentView, attribute: .Bottom, multiplier: 1, constant: -5))
         
     }
     

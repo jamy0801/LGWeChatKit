@@ -13,6 +13,7 @@ enum LGMessageType {
     case Text
     case Voice
     case Image
+    case Video
 }
 
 class Message {
@@ -88,6 +89,22 @@ class imageMessage: Message {
     
     init(incoming: Bool, sentDate: NSDate, iconName: String, image: UIImage) {
         self.image = image
+        super.init(incoming: incoming, sentDate: sentDate, iconName: iconName)
+    }
+}
+
+
+class videoMessage: Message {
+    let url: NSURL
+    
+    override var messageType: LGMessageType {
+        get {
+            return LGMessageType.Video
+        }
+    }
+    
+    init(incoming: Bool, sentDate: NSDate, iconName: String, url: NSURL) {
+        self.url = url
         super.init(incoming: incoming, sentDate: sentDate, iconName: iconName)
     }
 }
