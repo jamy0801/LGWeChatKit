@@ -100,6 +100,8 @@ class LGVideoController: UIViewController {
     
     func videoPlayDidEnd(notifation: NSNotification) {
         playItem.seekToTime(CMTimeMake(0, 1))
+        let layer = playView.layer as! AVPlayerLayer
+        layer.player?.play()
     }
 
     // MARK: operation

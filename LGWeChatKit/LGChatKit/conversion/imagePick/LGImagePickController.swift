@@ -25,6 +25,9 @@ class LGImagePickController: UITableViewController {
         super.viewDidLoad()
         viewModel = PHRootViewModel()
         
+        // hidden no used cell
+        tableView.tableFooterView = UIView(frame: CGRectZero)
+        
         PHPhotoLibrary.requestAuthorization { (authorizationStatus) -> Void  in
             if authorizationStatus == .Authorized {
                 self.viewModel?.getCollectionList()
