@@ -181,6 +181,8 @@
 		35F4D3261BE3170B00768E6D /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35F4D3251BE3170B00768E6D /* Photos.framework */; };
 		35F4D3281BE3171300768E6D /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35F4D3271BE3171300768E6D /* AudioToolbox.framework */; };
 		35F4D32A1BE3171A00768E6D /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35F4D3291BE3171A00768E6D /* VideoToolbox.framework */; };
+		35F520D31BF0CC41006F9C44 /* LGRecordVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F520D21BF0CC41006F9C44 /* LGRecordVideoView.swift */; };
+		35F520D51BF0CC4B006F9C44 /* LGRecordVideoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F520D41BF0CC4B006F9C44 /* LGRecordVideoModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -381,6 +383,8 @@
 		35F4D3251BE3170B00768E6D /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 		35F4D3271BE3171300768E6D /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		35F4D3291BE3171A00768E6D /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = System/Library/Frameworks/VideoToolbox.framework; sourceTree = SDKROOT; };
+		35F520D21BF0CC41006F9C44 /* LGRecordVideoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LGRecordVideoView.swift; sourceTree = "<group>"; };
+		35F520D41BF0CC4B006F9C44 /* LGRecordVideoModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LGRecordVideoModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -772,6 +776,8 @@
 		352FA1001BE9F5BD00CAD8B7 /* video */ = {
 			isa = PBXGroup;
 			children = (
+				35F520D21BF0CC41006F9C44 /* LGRecordVideoView.swift */,
+				35F520D41BF0CC4B006F9C44 /* LGRecordVideoModel.swift */,
 				352FA1011BE9F5CE00CAD8B7 /* LGAVPlayView.swift */,
 				355C21481BEA309800EBD882 /* LGVideoController.swift */,
 			);
@@ -1077,6 +1083,7 @@
 				3502BCD71BE231290028CADF /* LGMapViewController.swift in Sources */,
 				3502BD551BE231290028CADF /* LGConversionListCellModel.swift in Sources */,
 				3502BD581BE231290028CADF /* LGCommonEx.swift in Sources */,
+				35F520D31BF0CC41006F9C44 /* LGRecordVideoView.swift in Sources */,
 				3502BD471BE231290028CADF /* LGChatImageCell.swift in Sources */,
 				3502BBF41BE22FB80028CADF /* AppDelegate.swift in Sources */,
 				3502BD601BE231290028CADF /* LGFriendViewController.swift in Sources */,
@@ -1108,6 +1115,7 @@
 				3502BD4F1BE231290028CADF /* message.swift in Sources */,
 				3502BCD31BE231290028CADF /* LGImagePickController.swift in Sources */,
 				3502BD461BE231290028CADF /* LGChatBaseCell.swift in Sources */,
+				35F520D51BF0CC4B006F9C44 /* LGRecordVideoModel.swift in Sources */,
 				3502BD4D1BE231290028CADF /* LGShareMoreView.swift in Sources */,
 				3502BD571BE231290028CADF /* LGColorEx.swift in Sources */,
 				352FA1071BE9F79500CAD8B7 /* LGChatVideoCell.swift in Sources */,

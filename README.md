@@ -96,6 +96,10 @@ swift2.0仿微信界面，可滑动cell,自定义图片选择器,视频播放。
   ![](https://github.com/jamy0801/LGWeChatKit/blob/master/gif/video.gif)
 
 
+### 支持录制实时视频
+
+    ![](https://github.com/jamy0801/LGWeChatKit/blob/master/gif/recordVideo.jpg)
+
  #### 支持录音播放功能
  
   ![](https://github.com/jamy0801/LGWeChatKit/blob/master/gif/voice.gif)

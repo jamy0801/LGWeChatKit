@@ -98,6 +98,7 @@ class LGChatBaseCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
+        timeLabel.hidden = false
         contentView.addConstraint(iconContraintWithTime)
     }
     

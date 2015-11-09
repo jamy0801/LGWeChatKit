@@ -10,7 +10,7 @@ import UIKit
 
 
 enum shareMoreType: Int {
-    case picture = 1, video, location, movie, timeSpeak, hongbao, personCard, store
+    case picture = 1, video, location, record, timeSpeak, hongbao, personCard, store
     
     func imageForType() -> (UIImage, String) {
         var image = UIImage()
@@ -25,8 +25,8 @@ enum shareMoreType: Int {
         case .location:
             image = UIImage(named: "sharemore_location")!
             title = "位置"
-        case .movie:
-            image = UIImage(named: "sharemore_myfav")!
+        case .record:
+            image = UIImage(named: "sharemore_sight")!
             title = "小视频"
         case .timeSpeak:
             image = UIImage(named: "sharemore_wxtalk")!
@@ -75,7 +75,8 @@ class LGShareMoreView: UIView {
             button.setTitleColor(UIColor.blackColor(), forState: .Normal)
             button.setTitle(title, forState: .Normal)
             
-            
+//            button.titleEdgeInsets = UIEdgeInsetsMake(53, -59, 0, 0)
+//            button.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 21, 0)
             
             button.setBackgroundImage(UIImage(named: "sharemore_otherDown"), forState: .Normal)
             button.setBackgroundImage(UIImage(named: "sharemore_otherDownHL"), forState: .Highlighted)

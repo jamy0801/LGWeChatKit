@@ -38,11 +38,12 @@ class LGConversationViewController: UIViewController, UITableViewDataSource, UIT
     var recordIndicatorView: LGRecordIndicatorView!
     var videoController: LGVideoController!
     
-    var messageList = [Message]()
-    
     var recorder: LGAudioRecorder!
     var player: LGAudioPlayer!
+    var videoRecordBakgoundView: UIView!
+    var videoRecordView: LGRecordVideoView!
     
+    var messageList = [Message]()
     var toolBarConstranit: NSLayoutConstraint!
     
     // MARK: - lifecycle
@@ -423,9 +424,63 @@ extension LGConversationViewController: UIImagePickerControllerDelegate, UINavig
             mapCtrl.delegate = self
             let nav = UINavigationController(rootViewController: mapCtrl)
             self.presentViewController(nav, animated: true, completion: nil)
+        case .record:
+            beginVideoRecord()
         default:
             break
         }
+    }
+    
+    func beginVideoRecord() {
+        videoRecordView = LGRecordVideoView(frame: CGRectMake(0, view.bounds.height * 0.4, view.bounds.width, view.bounds.height * 0.6))
+        videoRecordBakgoundView = UIView(frame: view.bounds)
+        videoRecordBakgoundView.backgroundColor = UIColor.blackColor()
+        videoRecordBakgoundView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "videoBackgroundViewClick:"))
+        videoRecordBakgoundView.alpha = 0.6
+        videoRecordView.alpha = 1.0
+        
+        UIView.animateWithDuration(0.35, animations: { () -> Void in
+            self.view.endEditing(true)
+            self.toolBarConstranit.constant = self.videoRecordView.bounds.height
+            self.scrollToBottom()
+            self.view.layoutIfNeeded()
+            }) { (finish) -> Void in
+                self.view.addSubview(self.videoRecordBakgoundView)
+                self.view.addSubview(self.videoRecordView)
+        }
+        
+        videoRecordView.recordVideoModel.complectionClosure = { (url: NSURL) -> Void in
+            let message = videoMessage(incoming: false, sentDate: NSDate(), iconName: "", url: url)
+            self.messageList.append(message)
+            self.reloadTableView()
+            AudioServicesPlayAlertSound(messageOutSound)
+            self.toolBarView.showMore(false)
+            self.videoRecordComplection()
+        }
+        
+        videoRecordView.recordVideoModel.cancelClosure = {
+            self.videoRecordComplection()
+        }
+    }
+    
+    func videoBackgroundViewClick(gestureReconizer: UITapGestureRecognizer) {
+        videoRecordComplection()
+    }
+    
+    func videoRecordComplection() {
+        view.layoutIfNeeded()
+        UIView.animateWithDuration(0.35, animations: { () -> Void in
+            self.videoRecordBakgoundView.bounds.y = self.view.bounds.height
+            self.videoRecordView.bounds.y = self.view.bounds.height
+            }) { (_) -> Void in
+                self.videoRecordView.removeFromSuperview()
+                self.videoRecordBakgoundView.removeFromSuperview()
+                self.videoRecordBakgoundView = nil
+                self.videoRecordView = nil
+                self.toolBarConstranit.constant = 0
+                self.view.layoutIfNeeded()
+        }
+        toolBarView.showMore(false)
     }
     
     func sendImage(image: UIImage) {
