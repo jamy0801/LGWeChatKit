@@ -44,6 +44,7 @@ class LGChatVideoCell: LGChatBaseCell {
         do {
             let cgImage = try imageGenerator.copyCGImageAtTime(CMTimeMake(0, 1), actualTime: nil)
             backgroundImageView.image = UIImage(CGImage: cgImage)
+            try! NSFileManager.defaultManager().removeItemAtURL(message.url)
         } catch let error as NSError {
             NSLog("%@", error)
         }

@@ -21,6 +21,7 @@ class LGRecordVideoModel: NSObject, AVCaptureFileOutputRecordingDelegate {
     var backgroundTaskIdentifier: UIBackgroundTaskIdentifier!
     
     var filePath: NSURL?
+    var fileName: String!
     
     var complectionClosure: ((NSURL) -> Void)?
     var cancelClosure: (Void -> Void)?
@@ -59,6 +60,10 @@ class LGRecordVideoModel: NSObject, AVCaptureFileOutputRecordingDelegate {
         
         if captureSession.canAddOutput(captureMovieFileOutput) {
             captureSession.addOutput(captureMovieFileOutput)
+            let connection = captureMovieFileOutput.connectionWithMediaType(AVMediaTypeVideo)
+            if connection.supportsVideoStabilization {
+                connection.preferredVideoStabilizationMode = .Auto
+            }
         }
         captureSession.commitConfiguration()
         
@@ -105,6 +110,8 @@ class LGRecordVideoModel: NSObject, AVCaptureFileOutputRecordingDelegate {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "notificateAreChanged:", name: AVCaptureDeviceSubjectAreaDidChangeNotification, object: newCaptureDevice)
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "notificateSessionError:", name: AVCaptureSessionRuntimeErrorNotification, object: captureSession)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "sessionWasInterrupted:", name: AVCaptureSessionWasInterruptedNotification, object: captureSession)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "sessionInterruptEnd:", name: AVCaptureSessionInterruptionEndedNotification, object: captureSession)
     }
     
     func removeNotificationFromDevice(oldCaptureDevice: AVCaptureDevice) {
@@ -115,22 +122,37 @@ class LGRecordVideoModel: NSObject, AVCaptureFileOutputRecordingDelegate {
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
-    
     func notificateAreChanged(notification: NSNotification) {
         
+    }
+    
+    func sessionWasInterrupted(notification: NSNotification) {
+        NSLog("------sessionWasInterrupted---------")
+    }
+    
+    func sessionInterruptEnd(notification: NSNotification) {
+         NSLog("------sessionInterruptEnd---------")
     }
     
     func notificateSessionError(notification: NSNotification) {
         NSLog("notificateSessionError")
     }
     
-    func beginRecord(filePath: NSURL) {
+    func beginRecord() {
         if !captureMovieFileOutput.recording {
             if UIDevice.currentDevice().multitaskingSupported {
                 backgroundTaskIdentifier = UIApplication.sharedApplication().beginBackgroundTaskWithExpirationHandler(nil)
             }
-            self.filePath = filePath
-            captureMovieFileOutput.startRecordingToOutputFileURL(filePath, recordingDelegate: self)
+            
+            var fileName = String(stringInterpolationSegment: arc4random_uniform(1000))
+            fileName = fileName + ".m4v"
+            let filePath = NSString(string: NSTemporaryDirectory()).stringByAppendingPathComponent(fileName)
+            let fileUrl = NSURL(fileURLWithPath: filePath)
+            
+            self.fileName = fileName
+            self.filePath = fileUrl
+            
+            captureMovieFileOutput.startRecordingToOutputFileURL(fileUrl, recordingDelegate: self)
         } else {
             captureMovieFileOutput.stopRecording()
         }
@@ -139,9 +161,6 @@ class LGRecordVideoModel: NSObject, AVCaptureFileOutputRecordingDelegate {
     func complectionRecord() {
         if captureMovieFileOutput.recording {
             captureMovieFileOutput.stopRecording()
-        }
-        if let complection = complectionClosure {
-            complection(filePath!)
         }
     }
     
@@ -256,8 +275,13 @@ class LGRecordVideoModel: NSObject, AVCaptureFileOutputRecordingDelegate {
     func captureOutput(captureOutput: AVCaptureFileOutput!, didFinishRecordingToOutputFileAtURL outputFileURL: NSURL!, fromConnections connections: [AnyObject]!, error: NSError!) {
         NSLog("record finish")
         if error == nil {
+            
             let lastBackgroundTaskIdentifier = backgroundTaskIdentifier
             self.backgroundTaskIdentifier = UIBackgroundTaskInvalid
+            if let complection = complectionClosure {
+                complection(filePath!)
+            }
+            
             if needSaveToPHlibrary {
                 PHPhotoLibrary.sharedPhotoLibrary().performChanges({ () -> Void in
                     PHAssetCreationRequest.creationRequestForAsset().addResourceWithType(.Video, fileURL: outputFileURL, options: nil)

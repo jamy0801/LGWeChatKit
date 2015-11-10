@@ -107,12 +107,7 @@ class LGRecordVideoView: UIView {
                 self.recordButton.hidden = true
         }
         
-        var fileName = String(stringInterpolationSegment: arc4random_uniform(1000))
-        fileName = fileName + ".m4v"
-        let filePath = NSString(string: NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true).first!).stringByAppendingPathComponent(fileName)
-        let fileUrl = NSURL(fileURLWithPath: filePath)
-        
-        recordVideoModel.beginRecord(fileUrl)
+        recordVideoModel.beginRecord()
         stopTimer()
         self.progressView.hidden = false
         self.progressView2.hidden = false
